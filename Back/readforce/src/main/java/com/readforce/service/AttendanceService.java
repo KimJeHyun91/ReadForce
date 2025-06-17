@@ -52,4 +52,12 @@ public class AttendanceService {
 			
 		}
 	}
+	
+	@Transactional(readOnly = true)
+	public List<LocalDate> getAttendanceDates(String email) {
+	    return attendance_repository.findAllByEmail(email)
+	            .stream()
+	            .map(attendance -> attendance.getCreated_date().toLocalDate())
+	            .collect(Collectors.toList());
+	}
 }

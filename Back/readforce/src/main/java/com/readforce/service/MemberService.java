@@ -30,6 +30,7 @@ import com.readforce.exception.AuthenticationException;
 import com.readforce.exception.DuplicateException;
 import com.readforce.exception.JsonException;
 import com.readforce.exception.ResourceNotFoundException;
+import com.readforce.repository.AttendanceRepository;
 import com.readforce.repository.MemberRepository;
 import com.readforce.repository.NeedAdminCheckFailedDeletionLogRepository;
 
@@ -49,6 +50,7 @@ public class MemberService{
 	private final FileService file_service;
 	private final NeedAdminCheckFailedDeletionLogRepository need_admin_check_failed_deletion_log_repository;
 	private final MemberRepository memberRepository; //김기찬 관리자 페이짖
+	private final AttendanceRepository attendance_repository;
 	
 	@Value("${file.image.profile.upload-dir}")
 	private String profile_image_upload_dir;
@@ -387,5 +389,11 @@ public class MemberService{
 	    } else {
 	        throw new IllegalStateException("이미 활성화된 계정입니다.");
 	    }
+	}
+	
+	// 관리자 전용 유저 출석일 조회
+	@Transactional(readOnly = true)
+	public long getAttendanceCount(String email) {
+	    return attendance_repository.countByEmail(email);
 	}
 }

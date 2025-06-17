@@ -337,7 +337,7 @@ public class MemberController {
 		
 	}
 	
-	// 김기찬이 추가 출석
+	// 출석 - 기찬
     @GetMapping("/attendance-dates")
     public ResponseEntity<List<LocalDate>> getAttendanceDates(@AuthenticationPrincipal UserDetails userDetails) {
         String email = userDetails.getUsername();
@@ -345,7 +345,7 @@ public class MemberController {
         return ResponseEntity.ok(attendanceDates);
     }
     
-    // 관리자 전용 - 전체 회원 목록 조회
+    // 관리자 전용 - 전체 회원 목록 조회 - 기찬
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/get-all-members")
     public ResponseEntity<List<GetMemberObject>> getAllMembers() {
@@ -366,5 +366,14 @@ public class MemberController {
     public ResponseEntity<?> activateMember(@RequestParam("email") String email) {
         member_service.activateMember(email);
         return ResponseEntity.ok().build();
+    }
+    
+    // 관리자 전용 - 유저 출석일수 조회 - 기찬
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/get-attendance-count")
+    public ResponseEntity<Map<String, Long>> getAttendanceCount(
+            @RequestParam("email") String email) {
+        long count = member_service.getAttendanceCount(email);
+        return ResponseEntity.ok(Map.of("count", count));
     }
 }

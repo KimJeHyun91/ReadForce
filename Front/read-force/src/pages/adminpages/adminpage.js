@@ -20,7 +20,21 @@ const AdminPage = () => {
             if (!res.ok) throw new Error("권한 없음 또는 토큰 문제");
 
             const data = await res.json();
-            setUsers(data);
+
+            // 출석일 수 병렬 요청
+            const usersWithAttendance = await Promise.all(
+                data.map(async (user) => {
+                    try {
+                        const countRes = await fetchWithAuth(`/member/get-attendance-count?email=${user.email}`);
+                        const countData = await countRes.json();
+                        return { ...user, attendanceCount: countData.count ?? 0 };
+                    } catch {
+                        return { ...user, attendanceCount: 0 };
+                    }
+                })
+            );
+
+            setUsers(usersWithAttendance);
         } catch (error) {
             console.error("회원 목록 불러오기 실패", error);
         }
@@ -30,11 +44,17 @@ const AdminPage = () => {
         fetchUsers();
     }, []);
 
+    const updateUserStatus = (email, newStatus) => {
+        setUsers((prev) =>
+            prev.map((user) =>
+                user.email === email ? { ...user, status: newStatus } : user
+            )
+        );
+    };
+
     const handleDeactivate = async (email) => {
         try {
-            const res = await fetchWithAuth(`/member/deactivate-member?email=${email}`, {
-                method: "PATCH"
-            });
+            const res = await fetchWithAuth(`/member/deactivate-member?email=${email}`, { method: "PATCH" });
             if (!res.ok) throw new Error("비활성화 실패");
             updateUserStatus(email, "PENDING_DELETION");
         } catch (err) {
@@ -45,23 +65,13 @@ const AdminPage = () => {
 
     const handleActivate = async (email) => {
         try {
-            const res = await fetchWithAuth(`/member/activate-member?email=${email}`, {
-                method: "PATCH"
-            });
+            const res = await fetchWithAuth(`/member/activate-member?email=${email}`, { method: "PATCH" });
             if (!res.ok) throw new Error("활성화 실패");
             updateUserStatus(email, "ACTIVE");
         } catch (err) {
             console.error(err);
             alert("계정 활성화 실패");
         }
-    };
-
-    const updateUserStatus = (email, newStatus) => {
-        setUsers((prev) =>
-            prev.map((user) =>
-                user.email === email ? { ...user, status: newStatus } : user
-            )
-        );
     };
 
     return (
@@ -73,6 +83,7 @@ const AdminPage = () => {
                         <th style={{ border: "1px solid #ccc", padding: "8px" }}>닉네임</th>
                         <th style={{ border: "1px solid #ccc", padding: "8px" }}>이메일</th>
                         <th style={{ border: "1px solid #ccc", padding: "8px" }}>가입일</th>
+                        <th style={{ border: "1px solid #ccc", padding: "8px" }}>출석일 수</th>
                         <th style={{ border: "1px solid #ccc", padding: "8px" }}>상태</th>
                         <th style={{ border: "1px solid #ccc", padding: "8px" }}>관리</th>
                     </tr>
@@ -85,6 +96,7 @@ const AdminPage = () => {
                             <td style={{ border: "1px solid #ddd", padding: "8px" }}>
                                 {new Date(user.createDate).toLocaleDateString()}
                             </td>
+                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>{user.attendanceCount}</td>
                             <td style={{ border: "1px solid #ddd", padding: "8px" }}>{user.status}</td>
                             <td style={{ border: "1px solid #ddd", padding: "8px" }}>
                                 {user.nickname !== "관리자" && (
