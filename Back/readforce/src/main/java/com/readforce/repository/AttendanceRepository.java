@@ -26,4 +26,8 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Long>{
 			@Param("start_of_day") LocalDateTime start_of_day, 
 			@Param("end_of_day") LocalDateTime end_of_day);
 
+	List<Attendance> findAllByEmail(String email);
+
+	Long countByEmail(String email);
+
 }

@@ -14,6 +14,9 @@ public final class MessageCode {
 	public static final String FILE_NOT_NULL = "NO0007";
 	public static final String REFRESH_TOKEN_NOT_BLANK = "NO0008";
 	public static final String TEMPORAL_TOKEN_NOT_BLANK = "NO0009";
+	public static final String NEWS_ARTICLE_COUNTRY_NOT_BLANK = "NO0010";
+	public static final String NEWS_ARTICLE_LEVEL_NOT_BLANK = "NO0011";
+	public static final String NEWS_PASSAGE_NO_NOT_NULL = "NO0012";
 
 	
 	// 입력값 형식 불일치
@@ -21,6 +24,8 @@ public final class MessageCode {
 	public static final String PASSWORD_PATTERN_INVALID = "PA0002";
 	public static final String NICKNAME_PATTERN_INVALID = "PA0003";
 	public static final String FILE_TYPE_INVALID = "PA0004";
+	public static final String NEWS_ARTICLE_COUNTRY_PATTERN_INVALID = "PA0005";
+	public static final String NEWS_ARTICLE_LEVEL_PATTERN_INVALID = "PA0006";
 	
 	
 	// 입력값 크기/범위 불일치
@@ -46,6 +51,8 @@ public final class MessageCode {
 	public static final String REISSUE_ACCESS_TOKEN_SUCCESS = "SU0011"; // 엑세스 토큰 재발급 성공
 	public static final String SIGN_OUT_SUCCESS = "SU0012";
 	public static final String GET_TOKENS_SUCCESS = "SU0013";
+	public static final String MEMBER_DEACTIVATE_SUCCESS = "SU0014";
+	public static final String MEMBER_ACTIVATE_SUCCESS = "SU0015";
 
 	// 실패
 	public static final String VERIFICATION_CODE_SEND_FAIL = "FA0001";
@@ -63,7 +70,11 @@ public final class MessageCode {
 	public static final String MEMBER_NOT_FOUND_WITH_EMAIL = "NF0001";
 	public static final String FILE_NOT_FOUND = "NF0002";
 	public static final String PROFILE_IMAGE_URL_NOT_FOUND = "NF0003";
-
+	public static final String NEWS_PASSAGE_NOT_FOUND = "NF0004";
+	public static final String NEWS_QUIZ_NOT_FOUND = "NF0005";
+	public static final String ATTENDANCE_DATE_NOT_FOUND = "NF0006";
+	public static final String MEMBER_NOT_FOUND = "NF0007";
+	public static final String WITHDRAW_NOT_FOUND = "NF0008";
 	
 	
 	// 특정 상황
