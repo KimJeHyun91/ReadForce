@@ -44,7 +44,7 @@ const MyPage = () => {
   };
 
   useEffect(() => {
-    fetchWithAuth('/member/attendance-dates')
+    fetchWithAuth('/member/get-attendance-date-list')
       .then(res => res.json())
       .then(data => {
         let dates = [];

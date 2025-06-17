@@ -16,7 +16,7 @@ const AdminPage = () => {
 
     const fetchUsers = async () => {
         try {
-            const res = await fetchWithAuth("/member/get-all-members");
+            const res = await fetchWithAuth("/admin/get-all-member-list");
             if (!res.ok) throw new Error("권한 없음 또는 토큰 문제");
 
             const data = await res.json();
@@ -25,7 +25,7 @@ const AdminPage = () => {
             const usersWithAttendance = await Promise.all(
                 data.map(async (user) => {
                     try {
-                        const countRes = await fetchWithAuth(`/member/get-attendance-count?email=${user.email}`);
+                        const countRes = await fetchWithAuth(`/admin/get-attendance-count?email=${user.email}`);
                         const countData = await countRes.json();
                         return { ...user, attendanceCount: countData.count ?? 0 };
                     } catch {
@@ -54,7 +54,7 @@ const AdminPage = () => {
 
     const handleDeactivate = async (email) => {
         try {
-            const res = await fetchWithAuth(`/member/deactivate-member?email=${email}`, { method: "PATCH" });
+            const res = await fetchWithAuth(`/admin/deactivate-member?email=${email}`, { method: "PATCH" });
             if (!res.ok) throw new Error("비활성화 실패");
             updateUserStatus(email, "PENDING_DELETION");
         } catch (err) {
@@ -65,7 +65,7 @@ const AdminPage = () => {
 
     const handleActivate = async (email) => {
         try {
-            const res = await fetchWithAuth(`/member/activate-member?email=${email}`, { method: "PATCH" });
+            const res = await fetchWithAuth(`/admin/activate-member?email=${email}`, { method: "PATCH" });
             if (!res.ok) throw new Error("활성화 실패");
             updateUserStatus(email, "ACTIVE");
         } catch (err) {
