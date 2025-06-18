@@ -1,7 +1,6 @@
 package com.readforce.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -28,8 +27,23 @@ public class NewsService {
     private final OpenAiService openAiService; // 이 줄 추가!
 
 	
-	// 뉴스 기사 리스트(내림차순) 가져오기
-	public List<GetNewsPassage> getNewsPassagelist(String country, String level) {
+	// 나라에 해당하는 뉴스 기사 리스트(내림차순) 가져오기
+	public List<GetNewsPassage> getNewsPassageListByCountry(String country) {
+
+		List<GetNewsPassage> news_passage_list = news_passage_repository.findByCountryOrderByCreatedDate(country);
+		
+		if(news_passage_list.isEmpty()) {
+			
+			throw new NewsException(MessageCode.NEWS_PASSAGE_NOT_FOUND);
+			
+		}
+		
+		return news_passage_list;
+	}
+
+	
+	// 나라와 난이도에 해당하는 뉴스 기사 리스트(내림차순) 가져오기
+	public List<GetNewsPassage> getNewsPassagelistByCountryAndLevel(String country, String level) {
 		
 		List<GetNewsPassage> news_passage_list = news_passage_repository.findByCountryAndLevelOrderByCreatedDate(country, level);
 		

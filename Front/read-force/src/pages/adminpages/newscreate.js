@@ -75,7 +75,7 @@ const AdminNewsCreatePage = () => {
 
             {result && (
                 <div style={{ marginTop: "32px", borderTop: "1px solid #ccc", paddingTop: "24px" }}>
-                    <h3>✅ 생성된 기사 미리보기</h3>
+                    <h3>생성된 기사 미리보기</h3>
                     <p><strong>제목:</strong> {result.title}</p>
                     <p><strong>내용:</strong> {result.content}</p>
                 </div>
