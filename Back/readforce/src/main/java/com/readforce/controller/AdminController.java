@@ -75,7 +75,8 @@ public class AdminController {
 	
 	// 출석일 조회
 	@PreAuthorize("hasRole('ADMIN')")
-	@PatchMapping("/get-attendance-count")
+	// @PatchMapping("/get-attendance-count")
+	@GetMapping("/get-attendance-count")
 	public ResponseEntity<Long>  getAttendanceCount(
 			@RequestParam("email")
 			@NotBlank(message = MessageCode.EMAIL_NOT_BLANK)

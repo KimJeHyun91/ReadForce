@@ -28,3 +28,5 @@ yarn-error.log*
 *.log
 logs/
 workbench.xml
+
+Back/readforce/src/main/resources/application-secret.yml

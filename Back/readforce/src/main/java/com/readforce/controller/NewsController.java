@@ -6,12 +6,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.readforce.dto.NewsDto.GenerateNewsRequest;
 import com.readforce.dto.NewsDto.GetNewsPassage;
 import com.readforce.dto.NewsDto.GetNewsQuiz;
+import com.readforce.entity.NewsPassage;
 import com.readforce.enums.MessageCode;
 import com.readforce.service.NewsService;
 
@@ -61,6 +65,19 @@ public class NewsController {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(news_quiz_object);
 		
+	}
+	
+	// 기찬
+	@PostMapping("/generate-news")
+	public ResponseEntity<?> generateNewsWithAI(@RequestBody GenerateNewsRequest request) {
+	    System.out.println("🔥 요청 들어옴: " + request.getTopic());
+
+	    try {
+	        NewsPassage createdArticle = news_service.generateNewsWithAI(request);
+	        return ResponseEntity.ok(createdArticle);
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("생성 실패: " + e.getMessage());
+	    }
 	}
 	
 }

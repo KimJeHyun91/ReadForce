@@ -76,6 +76,20 @@ const AdminPage = () => {
 
     return (
         <div style={{ padding: "24px" }}>
+            <button
+                onClick={() => navigate("/admin/newscreate")}
+                style={{
+                    marginBottom: "16px",
+                    padding: "8px 16px",
+                    backgroundColor: "#007BFF",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "4px",
+                    cursor: "pointer"
+                }}
+            >
+                뉴스 기사 생성
+            </button>
             <h2>회원 목록</h2>
             <table style={{ width: "100%", borderCollapse: "collapse", marginTop: "16px" }}>
                 <thead>

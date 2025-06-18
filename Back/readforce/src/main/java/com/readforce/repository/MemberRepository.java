@@ -31,7 +31,7 @@ public interface MemberRepository extends JpaRepository<Member, String>{
 	Optional<Member> findByEmailAndStatus(String email, Status active);
 
 //	@Query("SELECT m FROM Member m")
-	@Query("SELECT new com.readforce.dto.MemberDto$GetMemberObject(m.email, m.nickname, m.social_provider, m.birthday) FROM Member m")
+	@Query("SELECT new com.readforce.dto.MemberDto$GetMemberObject(m.email, m.nickname, m.social_provider, m.birthday) FROM Member m")	
 	List<GetMemberObject> getAllMemberList();
 
 	

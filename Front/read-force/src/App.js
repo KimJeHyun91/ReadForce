@@ -26,6 +26,7 @@ import ReadingPage from './pages/quiz/ReadingPage';
 import ChallengePage from "./pages/challenge/challengepage";
 import NewsList from './components/News/NewsList';
 import ArticleQuestionPage from './components/News/ArticleQuestionPage';
+import AdminNewsCreatePage from './pages/adminpages/newscreate';
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
           <Route path="/adminpage" element={<AdminPage />} />
           <Route path="/literature/classic" element={<ClassicPage />} />
           <Route path="/question/:id" element={<ArticleQuestionPage />} />
+          <Route path="/admin/newscreate" element={<AdminNewsCreatePage />} />
        </Route>
       </Routes>
     </Router>

@@ -1,6 +1,7 @@
 package com.readforce.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.readforce.enums.MessageCode;
@@ -168,7 +169,7 @@ public class MemberDto {
 		private String nickname;
 		private String provider;
 		private LocalDate birthday;
-		
+//		private LocalDateTime createDate;
 	}
 	
 	

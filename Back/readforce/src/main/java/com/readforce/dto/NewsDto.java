@@ -53,5 +53,15 @@ public class NewsDto {
 
 	}
 	
+	// 기찬
+	@Getter
+	@Setter
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class GenerateNewsRequest {
+	    private String country;  // "kr", "us", ...
+	    private String level;    // "초급", "중급", "고급"
+	    private String topic;    // 예: "저출산 대책"
+	}
 	
 }
