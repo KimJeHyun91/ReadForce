@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import fetchWithAuth from '../../utils/fetchWithAuth';
+import './adminpage.css';
 
 const AdminPage = () => {
     const navigate = useNavigate();
@@ -76,43 +77,32 @@ const AdminPage = () => {
 
     return (
         <div style={{ padding: "24px" }}>
-            <button
-                onClick={() => navigate("/admin/newscreate")}
-                style={{
-                    marginBottom: "16px",
-                    padding: "8px 16px",
-                    backgroundColor: "#007BFF",
-                    color: "white",
-                    border: "none",
-                    borderRadius: "4px",
-                    cursor: "pointer"
-                }}
-            >
-                뉴스 기사 생성
-            </button>
+            <span className='admbtns'>
+                <button onClick={() => navigate("/newscreate")}>뉴스 기사 생성</button>
+                <button onClick={() => navigate("/AdminNewsListPage")}>뉴스 기사 목록</button>
+                <button onClick={() => navigate('/literature')}>문학 관리</button>
+            </span>
             <h2>회원 목록</h2>
-            <table style={{ width: "100%", borderCollapse: "collapse", marginTop: "16px" }}>
+            <table className='membertable' style={{ width: "100%", borderCollapse: "collapse", marginTop: "16px" }}>
                 <thead>
                     <tr>
-                        <th style={{ border: "1px solid #ccc", padding: "8px" }}>닉네임</th>
-                        <th style={{ border: "1px solid #ccc", padding: "8px" }}>이메일</th>
-                        <th style={{ border: "1px solid #ccc", padding: "8px" }}>가입일</th>
-                        <th style={{ border: "1px solid #ccc", padding: "8px" }}>출석일 수</th>
-                        <th style={{ border: "1px solid #ccc", padding: "8px" }}>상태</th>
-                        <th style={{ border: "1px solid #ccc", padding: "8px" }}>관리</th>
+                        <th>닉네임</th>
+                        <th>이메일</th>
+                        <th>가입일</th>
+                        <th>출석일 수</th>
+                        <th>상태</th>
+                        <th>관리</th>
                     </tr>
                 </thead>
                 <tbody>
                     {users.map((user) => (
                         <tr key={user.email}>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>{user.nickname}</td>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>{user.email}</td>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>
-                                {new Date(user.createDate).toLocaleDateString()}
-                            </td>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>{user.attendanceCount}</td>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>{user.status}</td>
-                            <td style={{ border: "1px solid #ddd", padding: "8px" }}>
+                            <td>{user.nickname}</td>
+                            <td>{user.email}</td>
+                            <td>{new Date(user.createDate).toLocaleDateString()}</td>
+                            <td>{user.attendanceCount}</td>
+                            <td>{user.status}</td>
+                            <td>
                                 {user.nickname !== "관리자" && (
                                     user.status === "PENDING_DELETION" ? (
                                         <button onClick={() => handleActivate(user.email)} style={{ color: "green" }}>

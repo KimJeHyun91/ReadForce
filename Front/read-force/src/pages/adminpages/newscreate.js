@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import fetchWithAuth from '../../utils/fetchWithAuth';
 
 const AdminNewsCreatePage = () => {
+    const navigate = useNavigate();
     const [country, setCountry] = useState("kr");
     const [level, setLevel] = useState("중급");
     const [topic, setTopic] = useState("");
@@ -38,6 +40,20 @@ const AdminNewsCreatePage = () => {
 
     return (
         <div style={{ padding: "24px" }}>
+            <button
+                onClick={() => navigate("/adminpage")}
+                style={{
+                    marginBottom: "16px",
+                    padding: "8px 16px",
+                    backgroundColor: "#6c757d",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "4px",
+                    cursor: "pointer"
+                }}
+            >
+                ⬅ 돌아가기
+            </button>
             <h2>뉴스 기사 생성</h2>
 
             <div style={{ marginBottom: "16px" }}>

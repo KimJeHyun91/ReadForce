@@ -27,6 +27,9 @@ import ChallengePage from "./pages/challenge/challengepage";
 import NewsList from './components/News/NewsList';
 import ArticleQuestionPage from './components/News/ArticleQuestionPage';
 import AdminNewsCreatePage from './pages/adminpages/newscreate';
+import AdminNewsListPage from './pages/adminpages/AdminNewsListPage';
+import LiteraturePage from './pages/adminpages/literature';
+import LiteratureDetail from './pages/adminpages/literaturedetail';
 
 function App() {
   return (
@@ -58,7 +61,10 @@ function App() {
           <Route path="/adminpage" element={<AdminPage />} />
           <Route path="/literature/classic" element={<ClassicPage />} />
           <Route path="/question/:id" element={<ArticleQuestionPage />} />
-          <Route path="/admin/newscreate" element={<AdminNewsCreatePage />} />
+          <Route path="/newscreate" element={<AdminNewsCreatePage />} />
+          <Route path="/AdminNewsListPage" element={<AdminNewsListPage />} />
+          <Route path="/literature" element={<LiteraturePage />} />
+          <Route path="/literaturedetail" element={<LiteratureDetail />} />
        </Route>
       </Routes>
     </Router>

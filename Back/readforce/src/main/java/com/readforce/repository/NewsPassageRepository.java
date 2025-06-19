@@ -12,6 +12,6 @@ import com.readforce.entity.News;
 
 @Repository
 public interface NewsPassageRepository extends JpaRepository<News, Long>{
-
+//    List<News> findByLanguageAndLevelOrderByCreatedDateDesc(String language, String level);
 
 }

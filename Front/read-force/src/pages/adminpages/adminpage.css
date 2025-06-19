@@ -1,0 +1,54 @@
+.admbtns {
+    display: flex;
+    gap: 8px;
+}
+
+.admbtns button {
+    margin-bottom: 16px;
+    padding: 8px 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.literatureTable {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.literatureTable tr {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.literatureTable td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.literatureTable th {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.membertable {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.membertable tr {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.membertable td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+.membertable th {
+    border: 1px solid black;
+    padding: 8px;
+}
