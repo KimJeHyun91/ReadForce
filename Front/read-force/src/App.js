@@ -64,7 +64,7 @@ function App() {
           <Route path="/newscreate" element={<AdminNewsCreatePage />} />
           <Route path="/AdminNewsListPage" element={<AdminNewsListPage />} />
           <Route path="/literature" element={<LiteraturePage />} />
-          <Route path="/literaturedetail" element={<LiteratureDetail />} />
+          <Route path="/literaturedetail/:id" element={<LiteratureDetail />} />
        </Route>
       </Routes>
     </Router>
