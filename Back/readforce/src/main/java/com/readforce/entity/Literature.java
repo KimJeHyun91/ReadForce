@@ -45,16 +45,17 @@ public class Literature {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "literature_no") // DB 컬럼명 유지
-	private Long literatureNo; // 변수명만 camelCase
-
+	@Column(name = "literature_no")
+	private Long literature_no;
+	
 	@Column(nullable = false)
 	private String title;
-
-	@CreatedDate
-	@Column(name = "created_date")
-	private LocalDateTime createdDate;
 	
 	@Column(nullable = false)
 	private String type;
+	
+	@CreatedDate
+	@Column(name = "created_date")
+	private LocalDateTime created_date;	
+	
 }

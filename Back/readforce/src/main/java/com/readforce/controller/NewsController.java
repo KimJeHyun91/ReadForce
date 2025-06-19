@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.readforce.dto.NewsDto.GenerateNewsRequest;
-import com.readforce.dto.NewsDto.GetNewsPassage;
+import com.readforce.dto.NewsDto.GetNews;
 import com.readforce.dto.NewsDto.GetNewsQuiz;
 //import com.readforce.entity.NewsPassage;
 import com.readforce.enums.MessageCode;
+import com.readforce.enums.News;
 import com.readforce.service.NewsService;
+import com.readforce.validation.ValidEnum;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -32,56 +32,93 @@ public class NewsController {
 
 	private final NewsService news_service;
 	
-	// 나라에 해당하는 뉴스기사 가져오기(반환시 내림차순 리스트 반환)
-//	@GetMapping("/get-news-passage-list-by-country")
-//	public ResponseEntity<List<GetNewsPassage>> getNewsPassageListByCountry(
-//			@RequestParam("country")
-//			@NotBlank(message = MessageCode.NEWS_ARTICLE_COUNTRY_NOT_BLANK)
-//			@Pattern(regexp = "^(kr|jp|uk|us)$", message = MessageCode.NEWS_ARTICLE_COUNTRY_PATTERN_INVALID)
-//			String country
-//	){
-//		
-//		// 뉴스 기사 리스트(내림차순) 가져오기
-//		List<GetNewsPassage> news_passage_list = news_service.getNewsPassageListByCountry(country);
-//		
-//		return ResponseEntity.status(HttpStatus.OK).body(news_passage_list);
-//		
-//	}
-//	
-//	// 나라와 난이도에 해당하는 뉴스기사 가져오기(반환시 내림차순 리스트 반환)
-//	@GetMapping("/get-news-passage-list-by-country-and-level")
-//	public ResponseEntity<List<GetNewsPassage>> getNewsPassagelistByCountryAndLevel(
-//			@RequestParam("country")
-//			@NotBlank(message = MessageCode.NEWS_ARTICLE_COUNTRY_NOT_BLANK)
-//			@Pattern(regexp = "^(kr|jp|uk|us)$", message = MessageCode.NEWS_ARTICLE_COUNTRY_PATTERN_INVALID)
-//			String country,
-//			@RequestParam("level")
-//			@NotBlank(message = MessageCode.NEWS_ARTICLE_LEVEL_NOT_BLANK)
-//			@Pattern(regexp = "^(초급|중급|고급)$", message = MessageCode.NEWS_ARTICLE_LEVEL_PATTERN_INVALID)
-//			String level
-//	){
-//		
-//		// 뉴스 기사 리스트(내림차순) 가져오기
-//		List<GetNewsPassage> news_passage_list = news_service.getNewsPassagelistByCountryAndLevel(country, level);
-//		
-//		return ResponseEntity.status(HttpStatus.OK).body(news_passage_list);		
-//		
-//	}
+	// 언어에 해당하는 뉴스기사 가져오기(내림차순/오름차순)
+	@GetMapping("/get-news-list-by-language")
+	public ResponseEntity<List<GetNews>> getNewsListByLanguage(
+			@RequestParam("language")
+			@NotBlank(message = MessageCode.NEWS_ARTICLE_LANGUAGE_NOT_BLANK)
+			@ValidEnum(enumClass = News.Language.class, message = MessageCode.NEWS_ARTICLE_LANGUAGE_PATTERN_INVALID)
+			String language,
+			@RequestParam("order_by")
+			@NotBlank(message = MessageCode.NEWS_ARTICLE_ORDER_BY_NOT_BLANK)
+			@ValidEnum(enumClass = News.OrderBy.class, message = MessageCode.NEWS_ARTICLE_ORDER_BY_INVALID)
+			String order_by
+	){
+		
+		// 뉴스 기사 리스트 가져오기
+		List<GetNews> news_list = news_service.getNewsListByLanguage(language, order_by);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(news_list);
+		
+	}
+	
+	// 언어와 난이도에 해당하는 뉴스기사 가져오기(내림차순/오름차순)
+	@GetMapping("/get-news-list-by-language-and-level")
+	public ResponseEntity<List<GetNews>> getNewsListByLanguageAndLevel(
+			@RequestParam("language")
+			@NotBlank(message = MessageCode.NEWS_ARTICLE_LANGUAGE_NOT_BLANK)
+			@ValidEnum(enumClass = News.Language.class, message = MessageCode.NEWS_ARTICLE_LANGUAGE_PATTERN_INVALID)
+			String language,
+			@RequestParam("level")
+			@NotBlank(message = MessageCode.NEWS_ARTICLE_LEVEL_NOT_BLANK)
+			@ValidEnum(enumClass = News.Level.class, message = MessageCode.NEWS_ARTICLE_LEVEL_PATTERN_INVALID)
+			String level,
+			@RequestParam("order_by")
+			@NotBlank(message = MessageCode.NEWS_ARTICLE_ORDER_BY_NOT_BLANK)
+			@ValidEnum(enumClass = News.OrderBy.class, message = MessageCode.NEWS_ARTICLE_ORDER_BY_INVALID)
+			String order_by
+	){
+		
+		// 뉴스 기사 리스트 가져오기
+		List<GetNews> news_list = news_service.getNewsListByLanguageAndLevel(language, level, order_by);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(news_list); 
+		
+	}
+	
+	// 언어와 난이도, 카테고리에 해당하는 뉴스기사 가져오기(내림차순/오름차순)
+	@GetMapping("/get-news-list-by-language-and-level-and-category")
+	public ResponseEntity<List<GetNews>> getNewsListByLanguageAndLevelAndCategory(
+			@RequestParam("language")
+			@NotBlank(message = MessageCode.NEWS_ARTICLE_LANGUAGE_NOT_BLANK)
+			@ValidEnum(enumClass = News.Language.class, message = MessageCode.NEWS_ARTICLE_LANGUAGE_PATTERN_INVALID)
+			String language,
+			@RequestParam("level")
+			@NotBlank(message = MessageCode.NEWS_ARTICLE_LEVEL_NOT_BLANK)
+			@ValidEnum(enumClass = News.Level.class, message = MessageCode.NEWS_ARTICLE_LEVEL_PATTERN_INVALID)
+			String level,
+			@RequestParam("category")
+			@NotBlank(message = MessageCode.NEWS_ARTICLE_CATEGORY_NOT_BLANK)
+			@ValidEnum(enumClass = News.Category.class, message = MessageCode.NEWS_ARTICLE_CATEGORY_INVALID)
+			String category,
+			@RequestParam("order_by")
+			@NotBlank(message = MessageCode.NEWS_ARTICLE_ORDER_BY_NOT_BLANK)
+			@ValidEnum(enumClass = News.OrderBy.class, message = MessageCode.NEWS_ARTICLE_ORDER_BY_INVALID)
+			String order_by
+	){
+		
+		// 뉴스 기사 리스트 가져오기
+		List<GetNews> news_list = news_service.getNewsListByLanguageAndLevelAndCategory(language, level, category, order_by);
+
+		return ResponseEntity.status(HttpStatus.OK).body(news_list);
+		
+	}
+	
 	
 	// 뉴스 기사 문제 가져오기
-//	@GetMapping("/get-news-quiz-object")
-//	public ResponseEntity<GetNewsQuiz> getNewsQuizObject(
-//			@RequestParam("news_passage_no")
-//			@NotNull(message = MessageCode.NEWS_PASSAGE_NO_NOT_NULL)
-//			Long news_passage_no
-//	){
-//		
-//		// 뉴스 기사 문제 가져오기
-//		GetNewsQuiz news_quiz_object = news_service.getNewsQuizObject(news_passage_no);
-//		
-//		return ResponseEntity.status(HttpStatus.OK).body(news_quiz_object);
-//		
-//	}
+	@GetMapping("/get-news-quiz-object")
+	public ResponseEntity<GetNewsQuiz> getNewsQuizObject(
+			@RequestParam("news_no")
+			@NotNull(message = MessageCode.NEWS_NO_NOT_NULL)
+			Long news_no
+	){
+		
+		// 뉴스 기사 문제 가져오기
+		GetNewsQuiz news_quiz = news_service.getNewsQuizObject(news_no);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(news_quiz);
+		
+	}
 	
 	// 기찬
 //	@PostMapping("/generate-news")

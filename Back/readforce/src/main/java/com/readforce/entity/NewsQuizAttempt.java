@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.readforce.id.LiteratureParagraphId;
+import com.readforce.id.NewsQuizAttemptId;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -25,27 +25,29 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LiteratureParagraph {
-	
+public class NewsQuizAttempt {
+
 	@EmbeddedId
-	private LiteratureParagraphId literature_paragraph_id;
+	private NewsQuizAttemptId news_quiz_attempt_id;
 	
-	@MapsId("literature_no")
+	@MapsId("email")
 	@ManyToOne
-	@JoinColumn(name = "literature_no")
-	private Literature literature;
+	@JoinColumn(name = "email")
+	private Member member;
 	
-	@Column(nullable = false)
-	private String category;
+	@MapsId("news_quiz_no")
+	@ManyToOne
+	@JoinColumn(name = "news_quiz_no")
+	private NewsQuiz news_quiz;
 	
-	@Column(nullable = false)
-	private String level;
+	@Column(name = "is_correct", nullable = false)
+	private Boolean is_correct;
 	
-	@Column(nullable = false, columnDefinition = "text")
-	private String content;
+	@Column(name = "selected_option_index", nullable = false)
+	private Integer selected_option_index;
 	
 	@CreatedDate
 	@Column(name = "created_date")
 	private LocalDateTime created_date;
-	
+		
 }

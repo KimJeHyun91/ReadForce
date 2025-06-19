@@ -1,11 +1,11 @@
 package com.readforce.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.readforce.entity.Literature;
 
+@Repository
 public interface LiteratureRepository extends JpaRepository<Literature, Long> {
-    List<Literature> findAllByOrderByLiteratureNoDesc(); // 번호 기준 내림차순
+
 }

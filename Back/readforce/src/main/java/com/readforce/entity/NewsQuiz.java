@@ -13,7 +13,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +29,7 @@ public class NewsQuiz {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "news_quiz_no")
 	private Long news_quiz_no;
 	
 	@Column(name = "question_text", nullable = false, columnDefinition = "text")
@@ -57,14 +57,15 @@ public class NewsQuiz {
 	private Double score;
 	
 	@CreatedDate
+	@Column(name = "created_date")
 	private LocalDateTime created_date;
 	
-	@Column(nullable = false)
-	private Long news_passage_no;
+	@Column(name = "news_no", nullable = false)
+	private Long news_no;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "news_passage_no", insertable = false, updatable = false)
-	private News news_passage;
+	@JoinColumn(name = "news_no", insertable = false, updatable = false)
+	private News news;
 	
 	
 }

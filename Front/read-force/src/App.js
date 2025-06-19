@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from "./pages/main";
 import MyPage from './pages/myinfo/MyPage';
 import LayOut from "./components/layout";
-import KoreaPage from './pages/articles/KoreaPage';
-import JapanPage from './pages/articles/JapanPage';
-import UsaPage from './pages/articles/UsaPage';
+import KoreaPage from './pages/news/KoreaPage';
+import JapanPage from './pages/news/JapanPage';
+import UsaPage from './pages/news/UsaPage';
 import SignupWithEmail from "./pages/signup/signupwithemail";
 import SignupChoice from "./pages/signup/signupchoice";
 import EmailVerifyPage from "./pages/signup/emailverifypage";
@@ -24,12 +24,15 @@ import AdminPage from './pages/adminpages/adminpage';
 import QuizPage from './pages/quiz/QuizPage';
 import ReadingPage from './pages/quiz/ReadingPage';
 import ChallengePage from "./pages/challenge/challengepage";
-import NewsList from './components/News/NewsList';
+// import NewsList from './components/News/NewsList';
 import ArticleQuestionPage from './components/News/ArticleQuestionPage';
 import AdminNewsCreatePage from './pages/adminpages/newscreate';
 import AdminNewsListPage from './pages/adminpages/AdminNewsListPage';
 import LiteraturePage from './pages/adminpages/literature';
 import LiteratureDetail from './pages/adminpages/literaturedetail';
+import NewsList from './components/news/NewsList';
+// import ArticleQuestionPage from './pages/news/ArticleQuestionPage';
+import ArticleResultPage from './pages/news/ArticleResultPage';
 
 function App() {
   return (
@@ -65,6 +68,7 @@ function App() {
           <Route path="/AdminNewsListPage" element={<AdminNewsListPage />} />
           <Route path="/literature" element={<LiteraturePage />} />
           <Route path="/literaturedetail/:id" element={<LiteratureDetail />} />
+          <Route path="/question-result" element={<ArticleResultPage />} />
        </Route>
       </Routes>
     </Router>
