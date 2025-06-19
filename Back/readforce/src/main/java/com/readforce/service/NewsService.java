@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.readforce.dto.NewsDto.GenerateNewsRequest;
 import com.readforce.dto.NewsDto.GetNewsPassage;
 import com.readforce.dto.NewsDto.GetNewsQuiz;
-import com.readforce.entity.NewsPassage;
+import com.readforce.entity.News;
 import com.readforce.entity.NewsQuiz;
 import com.readforce.enums.MessageCode;
 import com.readforce.exception.NewsException;
