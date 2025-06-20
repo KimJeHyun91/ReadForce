@@ -25,12 +25,12 @@ import QuizPage from './pages/quiz/QuizPage';
 import ReadingPage from './pages/quiz/ReadingPage';
 import ChallengePage from "./pages/challenge/challengepage";
 // import NewsList from './components/News/NewsList';
-import ArticleQuestionPage from './components/News/ArticleQuestionPage';
+import ArticleQuestionPage from './components/news/ArticleQuestion';
 import AdminNewsCreatePage from './pages/adminpages/newscreate';
 import AdminNewsListPage from './pages/adminpages/AdminNewsListPage';
 import LiteraturePage from './pages/adminpages/literature';
 import LiteratureDetail from './pages/adminpages/literaturedetail';
-import NewsList from './components/news/NewsList';
+// import NewsList from './components/News/NewsList';
 // import ArticleQuestionPage from './pages/news/ArticleQuestionPage';
 import ArticleResultPage from './pages/news/ArticleResultPage';
 

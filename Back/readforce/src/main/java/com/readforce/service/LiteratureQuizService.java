@@ -32,7 +32,7 @@ public class LiteratureQuizService {
             .orElseThrow(() -> new IllegalArgumentException("단락 없음"));
 
         LiteratureQuiz quiz = new LiteratureQuiz();
-        quiz.setLiterature_no(literature);
+        quiz.setLiterature_no(literatureNo);
         quiz.setLiterature_paragraph(paragraph);
         quiz.setQuestion_text(body.get("questionText"));
         quiz.setChoice1(body.get("choice1"));

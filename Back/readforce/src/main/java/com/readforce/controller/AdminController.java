@@ -214,8 +214,8 @@ import com.readforce.dto.MemberDto.GetMemberObject;
 import com.readforce.entity.Literature;
 import com.readforce.enums.MessageCode;
 import com.readforce.service.AttendanceService;
-import com.readforce.service.LiteratureParagraphService;
-import com.readforce.service.LiteratureQuizService;
+//import com.readforce.service.LiteratureParagraphService;
+//import com.readforce.service.LiteratureQuizService;
 import com.readforce.service.LiteratureService;
 import com.readforce.service.MemberService;
 
@@ -232,8 +232,8 @@ public class AdminController {
     private final MemberService member_service;
     private final AttendanceService attendance_service;
     private final LiteratureService literatureService;
-    private final LiteratureParagraphService paragraphService;
-    private final LiteratureQuizService literatureQuizService;
+//    private final LiteratureParagraphService paragraphService;
+//    private final LiteratureQuizService literatureQuizService;
 
     // ========================= 회원 관리 =========================
 
@@ -367,71 +367,71 @@ public class AdminController {
     public ResponseEntity<Literature> getLiteratureById(@RequestParam Long id) {
         return ResponseEntity.ok(literatureService.findById(id));
     }
-    
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/paragraph-create")
-    public ResponseEntity<?> createParagraph(@RequestBody Map<String, String> body) {
-        Long literatureNo = Long.valueOf(body.get("literatureNo"));
-        return ResponseEntity.ok(paragraphService.create(
-            literatureNo,
-            body.get("category"),
-            body.get("level"),
-            body.get("content")
-        ));
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/paragraph-list")
-    public ResponseEntity<?> listParagraphs(@RequestParam Long literatureNo) {
-        return ResponseEntity.ok(paragraphService.getParagraphsByLiterature(literatureNo));
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @PatchMapping("/paragraph-update")
-    public ResponseEntity<?> updateParagraph(@RequestBody Map<String, String> body) {
-        Long paragraphNo = Long.valueOf(body.get("paragraphNo"));
-        paragraphService.update(
-            paragraphNo,
-            body.get("category"),
-            body.get("level"),
-            body.get("content")
-        );
-        return ResponseEntity.ok().build();
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/paragraph-delete")
-    public ResponseEntity<?> deleteParagraph(@RequestParam Long paragraphNo) {
-        paragraphService.delete(paragraphNo);
-        return ResponseEntity.ok().build();
-    }
+//    
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @PostMapping("/paragraph-create")
+//    public ResponseEntity<?> createParagraph(@RequestBody Map<String, String> body) {
+//        Long literatureNo = Long.valueOf(body.get("literatureNo"));
+//        return ResponseEntity.ok(paragraphService.create(
+//            literatureNo,
+//            body.get("category"),
+//            body.get("level"),
+//            body.get("content")
+//        ));
+//    }
+//
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @GetMapping("/paragraph-list")
+//    public ResponseEntity<?> listParagraphs(@RequestParam Long literatureNo) {
+//        return ResponseEntity.ok(paragraphService.getParagraphsByLiterature(literatureNo));
+//    }
+//
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @PatchMapping("/paragraph-update")
+//    public ResponseEntity<?> updateParagraph(@RequestBody Map<String, String> body) {
+//        Long paragraphNo = Long.valueOf(body.get("paragraphNo"));
+//        paragraphService.update(
+//            paragraphNo,
+//            body.get("category"),
+//            body.get("level"),
+//            body.get("content")
+//        );
+//        return ResponseEntity.ok().build();
+//    }
+//
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @DeleteMapping("/paragraph-delete")
+//    public ResponseEntity<?> deleteParagraph(@RequestParam Long paragraphNo) {
+//        paragraphService.delete(paragraphNo);
+//        return ResponseEntity.ok().build();
+//    }
 
     // ========================= 문학 퀴즈 =========================
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("/quiz-create")
-    public ResponseEntity<?> createQuiz(@RequestBody Map<String, String> body) {
-        return ResponseEntity.ok(literatureQuizService.create(body));
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/quiz-list")
-    public ResponseEntity<?> listQuiz(@RequestParam Long literatureNo) {
-        return ResponseEntity.ok(literatureQuizService.listByLiterature(literatureNo));
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/quiz-delete")
-    public ResponseEntity<?> deleteQuiz(@RequestParam Long quizNo) {
-        literatureQuizService.delete(quizNo);
-        return ResponseEntity.ok().build();
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @PatchMapping("/quiz-update")
-    public ResponseEntity<?> updateQuiz(@RequestParam Long quizNo, @RequestBody Map<String, String> body) {
-        literatureQuizService.update(quizNo, body);
-        return ResponseEntity.ok().build();
-    }
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @PostMapping("/quiz-create")
+//    public ResponseEntity<?> createQuiz(@RequestBody Map<String, String> body) {
+//        return ResponseEntity.ok(literatureQuizService.create(body));
+//    }
+//
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @GetMapping("/quiz-list")
+//    public ResponseEntity<?> listQuiz(@RequestParam Long literatureNo) {
+//        return ResponseEntity.ok(literatureQuizService.listByLiterature(literatureNo));
+//    }
+//
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @DeleteMapping("/quiz-delete")
+//    public ResponseEntity<?> deleteQuiz(@RequestParam Long quizNo) {
+//        literatureQuizService.delete(quizNo);
+//        return ResponseEntity.ok().build();
+//    }
+//
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @PatchMapping("/quiz-update")
+//    public ResponseEntity<?> updateQuiz(@RequestParam Long quizNo, @RequestBody Map<String, String> body) {
+//        literatureQuizService.update(quizNo, body);
+//        return ResponseEntity.ok().build();
+//    }
 
 }

@@ -28,7 +28,7 @@ import lombok.Setter;
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	private Long literature_no;
 //	
-//	@Column(nullable = false)
+//	@Column(nullable = false)	
 //	private String title;
 //	
 //	@CreatedDate
@@ -46,7 +46,7 @@ public class Literature {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "literature_no")
-	private Long literature_no;
+	private Long literatureNo;
 	
 	@Column(nullable = false)
 	private String title;

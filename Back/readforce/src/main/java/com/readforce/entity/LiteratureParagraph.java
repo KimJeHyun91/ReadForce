@@ -46,6 +46,6 @@ public class LiteratureParagraph {
 	
 	@CreatedDate
 	@Column(name = "created_date")
-	private LocalDateTime created_date;
+	private LocalDateTime createdDate;
 	
 }
