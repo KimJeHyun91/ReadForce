@@ -55,7 +55,7 @@ public class LiteratureQuiz {
 	private String explanation;
 	
 	@Column(nullable = false)
-	private Double score;
+	private int score;
 	
 	@CreatedDate
 	@Column(name = "created_date")

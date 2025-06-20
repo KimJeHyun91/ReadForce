@@ -33,7 +33,7 @@ public class LiteratureParagraph {
 	@MapsId("literature_no")
 	@ManyToOne
 	@JoinColumn(name = "literature_no")
-	private Literature literature;
+	private Literature literatureNo;
 	
 	@Column(nullable = false)
 	private String category;
