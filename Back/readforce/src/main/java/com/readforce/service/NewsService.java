@@ -5,30 +5,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.readforce.dto.NewsDto;
 import com.readforce.dto.NewsDto.GetNews;
 import com.readforce.dto.NewsDto.GetNewsQuiz;
 import com.readforce.entity.News;
-import com.readforce.entity.NewsQuiz;
 import com.readforce.enums.MessageCode;
+import com.readforce.enums.NewsRelate;
 import com.readforce.exception.ResourceNotFoundException;
 import com.readforce.repository.NewsQuizRepository;
 import com.readforce.repository.NewsRepository;
-import com.readforce.util.OpenAiService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class NewsService {
 
 	private final NewsRepository news_repository;
 	private final NewsQuizRepository news_quiz_repository;
-    private final OpenAiService openAiService; // 이 줄 추가!
-
+	private final GeminiService gemini_service;
 	
 	// 언어에 해당하는 뉴스기사 가져오기(반환시 내림차순 리스트 반환)
 	@Transactional(readOnly = true)
@@ -186,5 +186,107 @@ public class NewsService {
  		
 		return proficiency_test_quiz;
 	}
+	
+	// Gemini 창작 뉴스 생성
+	@Transactional
+	public void generateCreativeNewsByGemini() {
+		
+		log.info("Gemini 창작 뉴스 생성 시작");
+		
+		int count = 0;
+		
+		for(NewsRelate.Language language : NewsRelate.Language.values()) {
+			
+			for(NewsRelate.Level level : NewsRelate.Level.values()) {
+				
+				for(NewsRelate.Category category : NewsRelate.Category.values()) {
+					
+					try {
+						
+						log.info("기사 생성 시작 - 언어 : {}, 난이도 : {}, 카테고리 : {}", language, level, category);
+						
+						NewsDto.NewsResult news_result =
+								gemini_service.generateCreativeNews(language, level, category);
+						
+						// 뉴스 엔티티 생성
+						News news = new News();
+						news.setTitle(news_result.title());
+						news.setLanguage(language.toString());
+						news.setCategory(category.toString());
+						news.setLevel(level.toString());
+						news.setContent(news_result.content());
+						
+						news_repository.save(news);
+						
+						count++;
+						
+						Thread.sleep(1000);
+						
+					} catch(Exception exception) {
+						
+						log.error("기사 생성 실패 - 언어 : {}, 난이도 : {}, 카테고리 : {}", language, level, category, exception.getMessage());
+						
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		log.info("전체 Gemini 창작 뉴스 생성 성공 - 총 {}개", count);
+		
+	}
 
+	// 뉴스 퀴즈 생성
+	public void generateCreativeNewsQuizByGemini() {
+		
+		log.info("Gemini 뉴스 퀴즈 생성 시작");
+		
+		// 뉴스에 해당하는 뉴스 퀴즈가 없는 뉴스 가져오기
+//		List<News> unquizzed_news = news_repository.findUnquizzedNews();
+//		
+//		int count = 0;
+//		
+//		for(News news : unquizzed_news) {
+//			
+//			
+//			
+//			
+//			
+//		}
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
