@@ -32,14 +32,14 @@ public class LiteratureQuizService {
             .orElseThrow(() -> new IllegalArgumentException("단락 없음"));
 
         LiteratureQuiz quiz = new LiteratureQuiz();
-        quiz.setLiterature(literature);
-        quiz.setParagraph(paragraph);
-        quiz.setQuestionText(body.get("questionText"));
+        quiz.setLiterature_no(literature);
+        quiz.setLiterature_paragraph(paragraph);
+        quiz.setQuestion_text(body.get("questionText"));
         quiz.setChoice1(body.get("choice1"));
         quiz.setChoice2(body.get("choice2"));
         quiz.setChoice3(body.get("choice3"));
         quiz.setChoice4(body.get("choice4"));
-        quiz.setCorrectAnswerIndex(Integer.parseInt(body.get("correctAnswerIndex")));
+        quiz.setCorrect_answer_index(Integer.parseInt(body.get("correctAnswerIndex")));
         quiz.setExplanation(body.get("explanation"));
         quiz.setScore(Integer.parseInt(body.getOrDefault("score", "1")));
 
@@ -57,12 +57,12 @@ public class LiteratureQuizService {
     public void update(Long quizNo, Map<String, String> body) {
         LiteratureQuiz quiz = quizRepository.findById(quizNo)
             .orElseThrow(() -> new IllegalArgumentException("문제 없음"));
-        quiz.setQuestionText(body.get("questionText"));
+        quiz.setQuestion_text(body.get("questionText"));
         quiz.setChoice1(body.get("choice1"));
         quiz.setChoice2(body.get("choice2"));
         quiz.setChoice3(body.get("choice3"));
         quiz.setChoice4(body.get("choice4"));
-        quiz.setCorrectAnswerIndex(Integer.parseInt(body.get("correctAnswerIndex")));
+        quiz.setCorrect_answer_index(Integer.parseInt(body.get("correctAnswerIndex")));
         quiz.setExplanation(body.get("explanation"));
         quiz.setScore(Integer.parseInt(body.getOrDefault("score", "1")));
         quizRepository.save(quiz);

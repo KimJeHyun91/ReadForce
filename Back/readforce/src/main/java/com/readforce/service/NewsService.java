@@ -17,6 +17,7 @@ import com.readforce.enums.MessageCode;
 import com.readforce.exception.ResourceNotFoundException;
 import com.readforce.repository.NewsQuizRepository;
 import com.readforce.repository.NewsRepository;
+import com.readforce.util.OpenAiService;
 
 import lombok.RequiredArgsConstructor;
 
