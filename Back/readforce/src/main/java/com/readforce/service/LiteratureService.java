@@ -184,8 +184,10 @@ public class LiteratureService {
 		get_literature_quiz.setLiterature_quiz_no(literature_quiz.getLiterature_quiz_no());
 		get_literature_quiz.setScore(literature_quiz.getScore());
 		get_literature_quiz.setContent(literature_quiz.getLiterature_paragraph().getContent());
+		get_literature_quiz.setTitle(literature_quiz.getLiterature_paragraph().getLiterature().getTitle());
 		
 		return get_literature_quiz;
+		
 	}
 	
 	// 문학 문제 생성(문학 문단에 해당하는 문제가 없을 시 생성)
@@ -195,6 +197,8 @@ public class LiteratureService {
 		
 		// 문학 문단에 해당하는 문제가 없는 문학 문단 리스트 조회
 		List<LiteratureParagraph> no_quiz_literature_paragraph_list = literature_paragraph_repository.findLiteratureParagraphListWithoutLiteratureQuiz();
+		
+		log.warn("1");
 		
 		int count = 0;
 		
