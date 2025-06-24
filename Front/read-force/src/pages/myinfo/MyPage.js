@@ -168,7 +168,7 @@ const MyPage = () => {
               <li key={i}>
                 {quiz.question_text} <button onClick={() => handleRetry(quiz)}>다시풀기</button>
               </li>
-            ))
+            ))  
           )}
         </ul>
       </div>
