@@ -8,6 +8,7 @@ const ArticleQuestionPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+
   const [quiz, setQuiz] = useState(null);
   const [article, setArticle] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -60,6 +61,7 @@ const ArticleQuestionPage = () => {
     }
 
     setArticle(loadedArticle);
+
 
     console.log("🔍 요청할 news_no:", loadedArticle.news_no);
 
@@ -160,6 +162,7 @@ const ArticleQuestionPage = () => {
         <p className="passage-text">{article.content}</p>
       </div>
 
+
       <div className="quiz-box">
         <h4 className="question-heading">💡 문제</h4>
         <p className="question-text">{quiz.question_text}</p>
@@ -168,12 +171,14 @@ const ArticleQuestionPage = () => {
             <button
               key={idx}
               className={`quiz-option ${selected === idx ? 'selected' : ''}`}
+
               onClick={() => setSelected(idx)}
             >
               {String.fromCharCode(65 + idx)}. {opt.text}
             </button>
           ))}
         </div>
+
 
         <div className="quiz-button-container">
           <button
@@ -184,6 +189,7 @@ const ArticleQuestionPage = () => {
             정답 제출
           </button>
         </div>
+
       </div>
     </div>
   );
