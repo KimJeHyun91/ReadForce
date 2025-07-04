@@ -52,6 +52,8 @@ public class SecurityConfig {
 			.exceptionHandling(exception -> exception.authenticationEntryPoint(customAuthenticationEntryPoint))
 			.authorizeHttpRequests(
 					auth -> auth.requestMatchers(
+							
+							"/quiz/get-most-incorrected-quiz ",
 								"/oauth2/**"				
 							
 							
