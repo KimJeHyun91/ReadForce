@@ -1,6 +1,8 @@
 package com.readforce.member.service;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +41,17 @@ public class AttendanceService {
 		
 		attendanceRepository.save(attendance);		
 		
+	}
+
+	@Transactional(readOnly = true)
+	public List<LocalDate> getAttendanceDateList(String email) {
+
+		return attendanceRepository
+				.findAllByMember_Email(email)
+				.stream()
+				.map(attendance -> attendance.getAttendanceDate())
+				.collect(Collectors.toList());
+
 	}
 
 }
