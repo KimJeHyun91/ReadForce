@@ -12,6 +12,7 @@ import com.readforce.common.exception.DuplicationException;
 import com.readforce.member.entity.Attendance;
 import com.readforce.member.entity.Member;
 import com.readforce.member.repository.AttendanceRepository;
+import com.readforce.result.service.ResultService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class AttendanceService {
 	
 	private final AttendanceRepository attendanceRepository;
-	
+	private final ResultService resultService;
 	private final MemberService memberService;
 	
 	@Transactional
@@ -39,7 +40,8 @@ public class AttendanceService {
 				.attendanceDate(LocalDate.now())
 				.build();
 		
-		attendanceRepository.save(attendance);		
+		attendanceRepository.save(attendance);
+		
 		
 	}
 
