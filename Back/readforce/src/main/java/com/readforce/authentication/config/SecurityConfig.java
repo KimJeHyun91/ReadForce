@@ -52,7 +52,7 @@ public class SecurityConfig {
 			.exceptionHandling(exception -> exception.authenticationEntryPoint(customAuthenticationEntryPoint))
 			.authorizeHttpRequests(
 					auth -> auth.requestMatchers(
-							"/member/sign-in",
+							"/authentication/sign-in",
 				            "/member/sign-up",
 				            "/member/social-sign-up",
 				            "/member/email-check",
