@@ -103,6 +103,16 @@ public class AiService {
 				passageService.savePassage(parsedResult.getTitle(), parsedResult.getContent(), author, publicationDate, categoryEntity, level, language, classification, null);
 				
 			}
+			
+			try {
+				
+				Thread.sleep(1000);
+				
+			} catch(InterruptedException exception){
+				
+				Thread.currentThread().interrupt();
+				
+			}
 
 		}
 			
@@ -270,6 +280,16 @@ public class AiService {
 						Passage newPassage = passageService.savePassage(parsedResult.getTitle(), parsedResult.getContent(), NameEnum.GEMINI.name(), LocalDate.now(), categoryEntity, level, language, classification, null);
 								
 						saveMultipleChoiceQuestion(newPassage, parsedResult);
+						
+					}
+					
+					try {
+						
+						Thread.sleep(1000);
+						
+					} catch(InterruptedException exception){
+						
+						Thread.currentThread().interrupt();
 						
 					}
 
