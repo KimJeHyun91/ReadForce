@@ -300,7 +300,7 @@ public class AiService {
 			}
 		} catch(Exception exception) {
 			
-			throw new JsonException(MessageCode.JSON_PROCESSING_FAIL);
+			return Collections.emptyList();
 			
 		}
 		
@@ -780,8 +780,9 @@ public class AiService {
 						
 		} catch(Exception exception) {
 			
-			throw new JsonException(MessageCode.JSON_PROCESSING_FAIL);
-			
+
+			return Collections.emptyList();
+
 		}
 		
 	}
