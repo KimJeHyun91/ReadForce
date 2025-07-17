@@ -5,7 +5,7 @@
   height: 80px;
 }
 
-/* === 왼쪽 로고 === */
+
 .header-left {
   display: flex;
   align-items: center;
@@ -21,7 +21,7 @@
   line-height: 1;
 }
 
-/* 강조 색상 */
+
 .highlight {
   color: #439395;
 }
@@ -30,7 +30,7 @@
   margin: 0;
   display: flex;
   align-items: center;
-  height: 100%;   /* 부모 따라감 */
+  height: 100%;  
   font-size: 28px;
   color: #5A5A5A;
 }
@@ -45,7 +45,7 @@
   color: #439395;
 }
 
-/* === 가운데 메뉴 === */
+
 .header-center {
   flex: 1;
   display: flex;
@@ -66,14 +66,14 @@
   font-size: 19px;
 }
 
-/* === 오른쪽 버튼 영역 === */
+
 .header-right {
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
-/* === 로그인/회원가입 버튼 === */
+
 .auth-buttons {
   display: flex;
   align-items: center;
@@ -89,7 +89,7 @@
   color: #5A5A5A;
 }
 
-/* === 언어 선택 === */
+
 .lang-selector {
   position: relative;
 }
@@ -127,7 +127,6 @@
   background-color: #f0f0f0;
 }
 
-/* === 드롭다운 메뉴 === */
 .user-menu-wrapper {
   position: relative;
 }
@@ -163,7 +162,6 @@
   background-color: #f0f0f0;
 }
 
-/* 공통 네비게이션 메뉴 항목 */
 .nav-item {
   position: relative;
   padding: 0 10px;
@@ -197,7 +195,6 @@
   cursor: pointer;
 }
 
-/* 모바일용 메뉴 스타일 */
 .mobile-menu {
   position: absolute;
   top: 80px;
@@ -223,7 +220,7 @@
   font-weight: bold;
 }
 
-/* 모바일 */
+
 @media (max-width: 768px) {
   .header-center,
   .auth-buttons {
@@ -231,7 +228,7 @@
   }
 
   .header-inner {
-    padding-left: 30px;   /* 원하는 만큼—8‒20 px 사이에서 조절 */
+    padding-left: 30px;  
   }
 
   .hamburger {
@@ -239,7 +236,7 @@
     margin-bottom: 10px;
   }
 
-  /* ❶ 모바일 메뉴 전체 */
+
 .mobile-menu {
   position: fixed;
   top: 80px;

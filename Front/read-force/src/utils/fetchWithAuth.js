@@ -1,7 +1,5 @@
-// fetchWithAuth.js
-
-let isRefreshing = false; // 토큰 재발급이 현재 진행 중인지 여부를 나타내는 플래그
-let failedQueue = []; // 재발급 대기 중인(401 응답을 받은) 원본 요청들을 저장하는 큐
+let isRefreshing = false; 
+let failedQueue = []; 
 
 const addRequestToQueue = (originalRequest) => {
   return new Promise(resolve => {
@@ -125,7 +123,7 @@ export const toggleFavoritePassage = async (passageNo, isFavorite) => {
 export const fetchFavoritePassageList = async () => {
   const res = await fetchWithAuth('/passage/get-favorite-passage-list');
   if (!res.ok) throw new Error('즐겨찾기 목록 실패');
-  return res.json();              // [passageNo, passageNo ...]
+  return res.json();              
 };
 
 export default fetchWithAuth;

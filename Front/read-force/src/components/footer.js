@@ -1,4 +1,3 @@
-// ✅ 공통 레이아웃 .page-container 반영됨
 import './footer.css';
 
 const Footer = () => {
