@@ -17,7 +17,6 @@ const SignupChoice = () => {
         <button className="signup-card kakao" onClick={() => window.location.href = "http://localhost:8080/oauth2/authorization/kakao"}>
           <img src={kakaoIcon} alt="카카오" />
           <span>카카오로 가입하기</span>
-          <span className="arrow">›</span>
         </button>
 
         {/* <button className="signup-card naver" onClick={() => window.location.href = "http://localhost:8080/oauth2/authorization/naver"}>
@@ -29,13 +28,11 @@ const SignupChoice = () => {
         <button className="signup-card google" onClick={() => window.location.href = "http://localhost:8080/oauth2/authorization/google"}>
           <img src={googleIcon} alt="구글" />
           <span>Google로 가입하기</span>
-          <span className="arrow">›</span>
         </button>
 
         <button className="signup-card email" onClick={() => navigate("/signup")}>
         <img src={emailIcon} alt="구글" />
           <span>이메일로 가입하기</span>
-          <span className="arrow">›</span>
         </button>
       </div>
     </div>

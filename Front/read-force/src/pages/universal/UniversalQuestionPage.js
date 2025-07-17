@@ -72,7 +72,7 @@ const UniversalQuestionPage = () => {
         setQuizList(data);
       })
       .catch((err) => {
-        console.error("퀴즈 로딩 실패:", err);
+
         setError("퀴즈 로딩 중 오류 발생");
       });
   }, [id, location.state]);
@@ -94,7 +94,7 @@ const UniversalQuestionPage = () => {
         }),
       });
     } catch (err) {
-      console.error('서버 저장 실패:', err);
+
       alert('답안 저장 중 오류가 발생했습니다. 다시 시도해주세요.');
       return;
     }

@@ -175,17 +175,29 @@ const Header = () => {
 
         <div className="menu-section-title">계정</div>
         <div className="menu-group">
-          {isLoggedIn ? (
-            <>
-              <div onClick={() => { setShowMobileMenu(false); navigate('/mypage'); }}>마이페이지</div>
-              <div onClick={handleLogout}>로그아웃</div>
-            </>
-          ) : (
-            <>
-              <div onClick={() => { setShowMobileMenu(false); navigate('/login'); }}>로그인</div>
-              <div onClick={() => { setShowMobileMenu(false); navigate('/signup/signupchoice'); }}>회원가입</div>
-            </>
-          )}
+            {isLoggedIn ? (
+              <>
+                <div onClick={() => { setShowMobileMenu(false); navigate('/mypage'); }}>마이페이지</div>
+                <div onClick={() => { setShowMobileMenu(false); navigate('/profile-edit'); }}>회원정보 수정</div>
+                {(!provider || provider === '') && (
+                  <div onClick={() => { setShowMobileMenu(false); navigate('/change-password'); }}>
+                    비밀번호 수정
+                  </div>
+                )}
+                {nickname === "관리자" && (
+                  <div onClick={() => { setShowMobileMenu(false); navigate('/adminpage'); }}>
+                    관리자 페이지
+                  </div>
+                )}
+                <div onClick={handleLogout}>로그아웃</div>
+              </>
+            ) : (
+              <>
+                <div onClick={() => { setShowMobileMenu(false); navigate('/login'); }}>로그인</div>
+                <div onClick={() => { setShowMobileMenu(false); navigate('/signup/signupchoice'); }}>회원가입</div>
+              </>
+            )}
+
         </div>
       </div>
     )}
