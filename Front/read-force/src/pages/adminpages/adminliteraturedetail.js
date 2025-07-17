@@ -11,7 +11,7 @@ const AdminLiteratureDetail = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // 문학 불러오기
+        
         const fetchLiteratureDetail = async () => {
             try {
                 const res = await axiosInstance.post(`/admin/get-all-literature-list`);
@@ -24,7 +24,7 @@ const AdminLiteratureDetail = () => {
             }
         };
 
-        // 문단 불러오기
+      
         const fetchParagraphs = async () => {
             try {
                 const res = await axiosInstance.get(`/admin/get-all-literature-paragraph-list`);
@@ -37,7 +37,7 @@ const AdminLiteratureDetail = () => {
             }
         };
 
-        // 퀴즈 불러오기
+      
         const fetchQuizzes = async () => {
             try {
                 const res = await axiosInstance.get(`/admin/get-all-literature-quiz-list`);
@@ -57,7 +57,7 @@ const AdminLiteratureDetail = () => {
 
     if (!literature) return <div>불러오는 중...</div>;
 
-    // 문단 삭제 ( 문제도 함께 )
+   
     const handleDeleteParagraph = async (paragraphNo) => {
         if (!window.confirm("정말 이 문단과 관련된 문제도 함께 삭제하시겠습니까?")) return;
 
@@ -80,7 +80,7 @@ const AdminLiteratureDetail = () => {
         }
     };
 
-    // 퀴즈 삭제
+    
     const handleDeleteQuiz = async (quizNo) => {
         if (!window.confirm("정말 이 퀴즈를 삭제하시겠습니까?")) return;
 

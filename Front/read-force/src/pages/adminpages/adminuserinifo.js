@@ -8,7 +8,7 @@ const AdminUserInfo = () => {
   const { email } = useParams();
   const [user, setUser] = useState(null);
 
-  // 스코어
+
   const [scoreList, setScoreList] = useState([]);
   const [newScore, setNewScore] = useState(0);
   const [modifiedScore, setModifiedScore] = useState(0);
@@ -19,10 +19,10 @@ const AdminUserInfo = () => {
   const [showAddScoreModal, setShowAddScoreModal] = useState(false);
   const [showModifyScoreModal, setShowModifyScoreModal] = useState(false);
 
-  // 문제 풀이 기록 가져오기
+ 
   const [totalLearning, setTotalLearning] = useState([]);
 
-  // 회원 정보 가져오기
+  
   const fetchUserInfo = async () => {
     try {
       const res = await axiosInstance.get(`/administrator/member/get-member`, {
@@ -35,7 +35,7 @@ const AdminUserInfo = () => {
     }
   };
 
-  // 문제 풀이 기록 가져오기
+  
   const fetchTotalLearning = async () => {
     try {
       const res = await axiosInstance.get(
@@ -50,7 +50,7 @@ const AdminUserInfo = () => {
     }
   };
 
-  // 스코어 가져오기
+  
   const fetchScoreList = async () => {
     try {
       const res = await axiosInstance.get(
@@ -66,7 +66,7 @@ const AdminUserInfo = () => {
     }
   };
 
-  // 스코어 생성 함수
+  
   const handleAddScore = async () => {
     try {
       await axiosInstance.post("/administrator/member/create-score-by-email", {
@@ -77,14 +77,14 @@ const AdminUserInfo = () => {
       });
       alert("스코어가 추가되었습니다.");
       setShowAddScoreModal(false);
-      fetchScoreList(); // 스코어 목록 갱신
+      fetchScoreList();
     } catch (err) {
       console.error(err);
       alert("스코어 추가 중 오류 발생");
     }
   };
 
-  // 스코어 수정 함수
+ 
   const handleModifyScore = async () => {
     try {
       await axiosInstance.patch("/administrator/member/modify-score-by-email", {
@@ -265,7 +265,7 @@ const AdminUserInfo = () => {
           <p>기록이 없습니다.</p>
         )}
       </div>
-      {/* 스코어 추가 모달 */}
+    
       {showAddScoreModal && (
         <div style={modalOverlayStyle}>
           <div style={modalContentStyle}>
@@ -310,7 +310,7 @@ const AdminUserInfo = () => {
         </div>
       )}
 
-      {/* 스코어 수정 모달 */}
+      
       {showModifyScoreModal && (
         <div style={modalOverlayStyle}>
           <div style={modalContentStyle}>

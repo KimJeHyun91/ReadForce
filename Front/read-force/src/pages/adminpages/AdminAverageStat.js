@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
-// ENUM 데이터 (한글화)
+
 const LANGUAGE_ENUM = [
   { label: "한국어", value: "KOREAN" },
   { label: "일본어", value: "JAPANESE" },
@@ -110,7 +110,7 @@ const AdminAverageStat = () => {
       <button onClick={() => navigate("/adminpage")} style={backbtn}>뒤로가기</button>
       <h2>연령별 평균 문제 풀이 시간 통계</h2>
 
-      {/* 생성 폼 */}
+     
       <div style={{ marginBottom: "24px" }}>
         <h3>새 통계 등록</h3>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
@@ -146,7 +146,7 @@ const AdminAverageStat = () => {
         </div>
       </div>
 
-      {/* 테이블 */}
+    
       {averageStats.length > 0 ? (
         <table style={{ width: "100%", borderCollapse: "collapse", marginTop: "16px" }}>
           <thead>
@@ -189,7 +189,7 @@ const AdminAverageStat = () => {
   );
 };
 
-// 공통 스타일
+
 const inputStyle = {
   padding: "8px",
   flex: "1 1 200px"

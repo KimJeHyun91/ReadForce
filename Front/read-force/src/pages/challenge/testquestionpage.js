@@ -121,7 +121,7 @@ const TestQuestionPage = () => {
     <div className="TestQuestion-right-container">
       <div className="TestQuestion-quiz-box">
         
-        {/* 타이머도 이 박스 안에 넣기 */}
+       
         <div className="TestQuestion-timer">⏱️ 남은 시간: {timeLeft}초</div>
 
         <h4 className="TestQuestion-quiz-title">문제</h4>
@@ -138,7 +138,7 @@ const TestQuestionPage = () => {
           </button>
         ))}
 
-        {/* 제출 버튼도 quiz-box 안에 함께 넣기 */}
+       
         <div className="TestQuestion-controls">
           <button
             className="TestQuestion-submit"

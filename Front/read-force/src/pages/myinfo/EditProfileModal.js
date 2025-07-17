@@ -7,7 +7,7 @@ const EditProfileModal = ({ onClose }) => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const modalRef = useRef(null);
     const [showMenu, setShowMenu] = useState(false);
-    const [profileImage, setProfileImage] = useState('https://via.placeholder.com/100'); // 임시 이미지
+    const [profileImage, setProfileImage] = useState('https://via.placeholder.com/100'); 
 
 
     useEffect(() => {
@@ -25,22 +25,22 @@ const EditProfileModal = ({ onClose }) => {
         }
 
         alert(`닉네임: ${nickname}, 비밀번호: ${password}`);
-        onClose(); // 닫기
+        onClose();
     };
 
     const handleUploadClick = () => {
 
-        // TODO: 파일 업로드 로직
+        
     };
 
     const handleDeleteClick = () => {
 
-        // TODO: 삭제 API 호출
+        
     };
 
     const handleWithdraw = () => {
 
-        // TODO: 탈퇴 API 호출
+        
     };
 
 

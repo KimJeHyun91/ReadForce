@@ -34,7 +34,6 @@ export default function Socialsignup() {
     }
   };
 
-  // 닉네임 형식 + 중복 검사
   const validateNickname = async (value) => {
     const nicknameRegex = /^[a-zA-Z가-힣0-9]{2,12}$/;
   

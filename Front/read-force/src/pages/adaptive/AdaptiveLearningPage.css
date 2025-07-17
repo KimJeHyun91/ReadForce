@@ -1,4 +1,4 @@
-/* ───────── 기본 = 모바일(≤375 px) ───────── */
+
 .adaptive-learning-container {
   display: flex;
   flex-direction: column;
@@ -9,9 +9,9 @@
 
 .adaptive-content-wrapper {
   width: 100%;
-  max-width: 1000px;      /* 데스크톱 한계 */
+  max-width: 1000px;      
   display: flex;
-  flex-direction: column; /* 모바일은 세로 */
+  flex-direction: column; 
   align-items: center;
   gap: 2rem;
 }
@@ -21,20 +21,20 @@ main.adaptive-narrow {
   padding-right: 0 !important;
 }
 
-/* 로봇 애니메이션 */
+
 .robot-animation {
-  width: 180px;           /* 화면 70% 정도 */
+  width: 180px;          
   max-width: 60vw;
   height: auto;
 }
 
-/* 소개 문구 */
+
 .adaptive-intro {
   text-align: center;
 }
 
 .adaptive-intro p {
-  font-size: 1.25rem;     /* ≈20 px */
+  font-size: 1.25rem;    
   line-height: 1.5;
   color: #868686;
   margin: 2px 0;
@@ -46,7 +46,7 @@ main.adaptive-narrow {
   font-weight: 700;
 }
 
-/* 시작 버튼 */
+
 .start-button  { margin-top: 2.5rem; }
 .start-button a{
   display:inline-block;
@@ -63,10 +63,10 @@ main.adaptive-narrow {
 
 
 
-/* ───────── 태블릿 이상 ≥ 768 px ───────── */
+
 @media (min-width:768px){
   .adaptive-content-wrapper{
-    flex-direction: row;          /* 좌우 배치 */
+    flex-direction: row;       
     align-items: flex-start;
     gap: 3rem;
   }
@@ -78,7 +78,7 @@ main.adaptive-narrow {
     margin-left: 0;
   }
 
-  .adaptive-intro p { font-size:1.5rem; }        /* ≈24 px */
+  .adaptive-intro p { font-size:1.5rem; }       
   .nickname        { font-size:1.5rem; }
 
   .start-button{ margin-top:3.5rem; }
@@ -89,9 +89,9 @@ main.adaptive-narrow {
   display: none;
 }
 
-@media (max-width:375px){            /* ⏬ 새로 추가: 초소형 스마트폰 전용 */
+@media (max-width:375px){            
   .adaptive-intro p {
-    font-size: 1.5rem;              /* 약 18px 정도 */
+    font-size: 1.5rem;            
   }
   .adaptive-intro {
     margin-top: 15px;     

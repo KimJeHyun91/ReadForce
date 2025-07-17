@@ -74,8 +74,8 @@ const Header = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
-        setShowMobileMenu(false); // 데스크톱으로 전환되면 강제로 닫음
-        document.body.classList.remove("no-scroll"); // 스크롤 잠금도 해제
+        setShowMobileMenu(false);
+        document.body.classList.remove("no-scroll"); 
       }
     };
 
@@ -85,9 +85,9 @@ const Header = () => {
 
   useEffect(() => {
     if (showMobileMenu) {
-      document.body.classList.add("no-scroll"); // 모바일 메뉴 열릴 때
+      document.body.classList.add("no-scroll"); 
     } else {
-      document.body.classList.remove("no-scroll"); // 닫힐 때 해제
+      document.body.classList.remove("no-scroll"); 
     }
   }, [showMobileMenu]);
 
@@ -161,10 +161,10 @@ const Header = () => {
         </div>
       </div>
 
-    {/* 모바일 메뉴: 햄버거 클릭 시 */}
+
     {showMobileMenu && (
       <div className="mobile-menu">
-        {/* 메인 네비게이션 */}
+      
         <div className="menu-group">
           <Link to="/article"           onClick={() => setShowMobileMenu(false)}>뉴스</Link>
           <Link to="/novel"             onClick={() => setShowMobileMenu(false)}>소설</Link>

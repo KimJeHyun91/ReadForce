@@ -11,7 +11,7 @@ const AdminPassage = () => {
     const [loadingPassage, setLoadingPassage] = useState(false);
     const [loadingQuestion, setLoadingQuestion] = useState(false);
 
-    // 지문 생성 모달
+
     const [showPassageModal, setShowPassageModal] = useState(false);
     const [language, setLanguage] = useState("KOREAN");
     const [level, setLevel] = useState(1);
@@ -19,14 +19,14 @@ const AdminPassage = () => {
     const [type, setType] = useState("ECONOMY");
     const [classification, setClassification] = useState("NORMAL");
 
-    // 지문 불러오기
+   
     const [passageList, setPassageList] = useState([]);
     const [count, setCount] = useState(1);
 
-    // 챌린지 문제 전환
+   
     const [loadingChallenge, setLoadingChallenge] = useState(false);
 
-    // 지문 직접 추가 모달
+  
     const [showUploadModal, setShowUploadModal] = useState(false);
     const [newPassage, setNewPassage] = useState({
         title: "",
@@ -76,7 +76,7 @@ const AdminPassage = () => {
     setType(defaultType);
 }, [category]);
 
-    // 지문 불러오기
+    
     useEffect(() => {
         const fetchPassages = async () => {
             try {
@@ -90,7 +90,7 @@ const AdminPassage = () => {
         fetchPassages();
     }, []);
 
-    // 테스트 지문 생성
+    
         const handleGenerateTestPassage = async () => {
             setLoadingTestPassage(true);
             try {
@@ -104,7 +104,7 @@ const AdminPassage = () => {
                 setLoadingTestPassage(false);
             }
         };
-        // 테스트 문제 생성 
+       
         const handleGenerateTestQuestion = async () => {
             setLoadingTestQuestion(true);
             try {
@@ -119,7 +119,7 @@ const AdminPassage = () => {
             }
         };
 
-    // 일반 지문 생성
+    
     const handleGeneratePassageWithParams = async () => {
         setLoadingPassage(true);
         try {
@@ -142,7 +142,7 @@ const AdminPassage = () => {
         }
     };
 
-    // 일반 문제 생성
+  
     const handleGenerateQuestion = async () => {
         setLoadingQuestion(true);
         try {
@@ -169,7 +169,7 @@ const AdminPassage = () => {
         setLoadingChallenge(false);
     }
 };
-    // 지문 삭제
+    
     const handleDeletePassage = async (passageNo) => {
         const confirmDelete = window.confirm("정말 이 지문을 삭제하시겠습니까?");
         if (!confirmDelete) return;
@@ -180,7 +180,7 @@ const AdminPassage = () => {
             });
 
             alert("성공 : 지문이 삭제되었습니다.");
-            // 삭제 후 리스트 갱신
+            
             setPassageList(prev => prev.filter(p => p.passageNo !== passageNo));
         } catch (err) {
             console.error("실패 : 지문 삭제 중 오류 발생:", err);
@@ -188,13 +188,13 @@ const AdminPassage = () => {
         }
     };
 
-    // 지문 직접 등록
+    
     const handleUploadPassage = async () => {
         try {
             const res = await axiosInstance.post("/administrator/passage/upload-passage", newPassage);
             alert("성공 : 지문 등록 완료!");
             setShowUploadModal(false);
-            // 다시 목록 불러오기
+            
             const refreshed = await axiosInstance.get("/passage/get-all-passages");
             setPassageList(refreshed.data);
         } catch (err) {
@@ -253,7 +253,7 @@ const AdminPassage = () => {
                             <option value="TEST">테스트</option>
                         </select>
 
-                        <br /><label>생성 개수:</label> {/* ✅ 추가됨 */}
+                        <br /><label>생성 개수:</label> 
                         <input type="number" min="1" max="20" value={count} onChange={(e) => setCount(parseInt(e.target.value) || 1)} />
 
                         <div style={{ marginTop: "16px", display: "flex", justifyContent: "space-between" }}>

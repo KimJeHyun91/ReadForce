@@ -7,7 +7,7 @@ const AdminLiterature = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // 문학 목록 불러오기
+       
         const fetchLiterature = async () => {
             try {
                 const res = await axiosInstance.post("/admin/get-all-literature-list");
@@ -21,7 +21,7 @@ const AdminLiterature = () => {
         fetchLiterature();
     }, []);
 
-    // 문학 문제 생성
+  
     const handleGenerateQuiz = async () => {
         if (!window.confirm("문학 문제를 생성하시겠습니까?\n(문제가 없는 문단에만 생성됩니다)")) return;
 
@@ -29,7 +29,7 @@ const AdminLiterature = () => {
             await axiosInstance.post("/admin/generate-creative-literature-quiz");
             alert("문학 문제가 생성되었습니다!");
 
-            // 문학 목록 갱신 (옵션)
+            
             const refresh = await axiosInstance.post("/admin/get-all-literature-list");
             setLiteratureList(refresh.data);
 
@@ -39,7 +39,7 @@ const AdminLiterature = () => {
         }
     };
 
-    // 문학 삭제 ( 문제, 문단 함께 )
+    
     const handleDeleteLiterature = async (literatureNo) => {
         if (!window.confirm("정말 이 문학과 관련된 모든 데이터를 삭제하시겠습니까?")) return;
 
@@ -49,7 +49,7 @@ const AdminLiterature = () => {
             });
             alert("삭제되었습니다.");
 
-            // 목록 갱신
+            
             setLiteratureList(prev => prev.filter(lit => lit.literature_no !== literatureNo));
         } catch (err) {
             console.error(err);

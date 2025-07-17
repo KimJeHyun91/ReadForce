@@ -1,4 +1,4 @@
-/* ───────── 기본 = 모바일(≤375 px) ───────── */
+
 .quiz-layout {
   display: flex;
   flex-direction: column;
@@ -16,10 +16,10 @@
   box-shadow: 0 2px 6px rgba(0,0,0,.05);
   padding: 1.25rem;
   overflow-y: auto;
-  max-height: 90vh; /* 모바일에서 전체 화면 높이 대비 제한 */
+  max-height: 90vh; 
 }
 
-/* 지문 영역 */
+
 .quiz-passage {
   max-height: 320px;
   overflow-y: auto;
@@ -28,7 +28,7 @@
 .passage-title  { font-size: 1.05rem; font-weight: 700; margin-bottom: .4rem; }
 .passage-text   { font-size: .9rem;  line-height: 1.55; white-space: pre-line; }
 
-/* 문제 박스 */
+
 .question-heading { font-size: 1rem; font-weight: 700; margin-bottom: .6rem; }
 .question-text    { font-size: .9rem; font-weight: 700; margin-bottom: .8rem; }
 
@@ -63,7 +63,7 @@
 .submit-button:hover    { background:#0f766e; }
 .submit-button:disabled { background:#ccc;   cursor:not-allowed; }
 
-/* 10초 대기 메시지 */
+
 .wait-message {
   text-align: center;
   font-size: 16px;
@@ -72,7 +72,7 @@
   font-weight: bold;
 }
 
-/* ‘문제 없음’ 화면 */
+
 .quiz-notfound-container {
   margin-top: 4rem;
   padding: 1.75rem 1.25rem;
@@ -90,7 +90,7 @@
 .quiz-notfound-container .go-back-button:hover{background:#e0e0e0;}
 
 
-/* ───────── 태블릿 이상 ≥768 px ───────── */
+
 @media (min-width:768px){
   .quiz-layout      { flex-direction: row; gap: 2rem; padding: 0 20px; }
   .quiz-passage      { flex:1; max-height: 500px; overflow-y: auto; }
@@ -105,7 +105,7 @@
   .submit-button     { font-size: 1.05rem; }
 }
 
-/* ───────── 데스크톱 이상 ≥1024 px ───────── */
+
 @media (min-width:1024px){
   .quiz-layout      { gap: 2.5rem; padding: 0 24px; }
   .quiz-passage      { max-height: 600px; }

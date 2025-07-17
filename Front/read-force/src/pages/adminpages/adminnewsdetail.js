@@ -14,7 +14,7 @@ const AdminNewsDetail = () => {
                 const res = await axiosInstance.get("/admin/get-all-news-quiz-list");
                 const data = res.data;
 
-                // 현재 뉴스 번호와 연관된 퀴즈만 필터링
+                
                 const relatedQuiz = data.filter(q => q.news_no === news.news_no);
                 setQuizList(relatedQuiz);
             } catch (err) {
@@ -29,7 +29,7 @@ const AdminNewsDetail = () => {
 
     if (!news) return <div>잘못된 접근입니다.</div>;
 
-    // 문제 삭제
+   
     const handleDeleteQuiz = async (quizNo) => {
         if (!window.confirm("정말 삭제하시겠습니까?")) return;
 

@@ -26,7 +26,7 @@ export default function Login() {
       const data = await response.json();
 
 if (response.ok) {
-  // ② 필드명 양쪽 다 시도
+ 
   const token        = data.ACCESS_TOKEN  || data.accessToken;
   const refreshToken = data.REFRESH_TOKEN || data.refreshToken;
   const nickname     = data.NICKNAME      || data.nickname;

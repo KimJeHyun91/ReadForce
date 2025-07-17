@@ -37,7 +37,7 @@ const AdminPassageDetail = () => {
             });
             alert("성공: 문제 생성 완료!");
 
-            // 문제 목록 새로고침
+           
             const refreshed = await axiosInstance.get("/multiple_choice/get-multiple-choice-question-list", {
                 params: { passageNo: passage.passageNo }
             });
@@ -141,7 +141,7 @@ const AdminPassageDetail = () => {
     );
 };
 
-// ------------------- Styles -------------------
+
 
 const containerStyle = {
     padding: "24px",
