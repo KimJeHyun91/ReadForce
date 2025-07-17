@@ -33,7 +33,6 @@ const EmailVerifyPage = () => {
       }
     } catch (err) {
       setError('서버 오류가 발생했습니다.');
-      console.error('이메일 인증 실패:', err);
     }
   };
 
