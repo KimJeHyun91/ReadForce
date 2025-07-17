@@ -38,7 +38,15 @@ const ChallengeQuizPage = () => {
       params: { language, category, type }
     })
       .then(res => setQuizzes(res.data))
-      .catch(() => alert('문제 불러오기 실패'))
+      .catch((error) => {
+        const errorCode =
+        error.response?.data?.MESSAGE_CODE || 
+        error.response?.data?.messageCode ||  
+        error.response?.data?.message;
+        const errorMessage = messageMap[errorCode] || '문제 불러오기 실패';
+        alert(errorMessage);
+        navigate('/challenge');
+      })
       .finally(() => setLoading(false));
 
     timerRef.current = setInterval(() => {

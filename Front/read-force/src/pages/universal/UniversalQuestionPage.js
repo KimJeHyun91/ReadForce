@@ -23,8 +23,8 @@ const UniversalQuestionPage = () => {
   const currentQuiz = quizList[currentIndex];
 
   const formatTime = (seconds) => {
-    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
-    const s = String(seconds % 60).padStart(2, '0');
+    const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const s = String(seconds % 60).padStart(2, "0");
     return `${m}:${s}`;
   };
 
@@ -53,10 +53,10 @@ const UniversalQuestionPage = () => {
   useEffect(() => {
     const loadedPassage = location.state?.passage || {
       passageNo: Number(id),
-      title: '',
-      summary: '',
-      content: '',
-      language: '한국어',
+      title: "",
+      summary: "",
+      content: "",
+      language: "한국어",
     };
 
     if (!loadedPassage.passageNo) {
@@ -110,11 +110,11 @@ const UniversalQuestionPage = () => {
       setCurrentIndex(currentIndex + 1);
     } else {
       const categoryPath =
-        passage.category === 'NEWS'
-          ? 'article'
-          : passage.category === 'NOVEL'
-          ? 'novel'
-          : 'fairytale';
+        passage.category === "NEWS"
+          ? "article"
+          : passage.category === "NOVEL"
+          ? "novel"
+          : "fairytale";
 
       navigate(`/${categoryPath}/result`, {
         state: {
@@ -162,11 +162,12 @@ const UniversalQuestionPage = () => {
             {currentQuiz.choiceList.map((choice, idx) => (
               <button
                 key={idx}
-                className={`quiz-option ${selected === idx ? 'selected' : ''}`}
+                className={`quiz-option ${selected === idx ? "selected" : ""}`}
                 disabled={isWaiting}
                 onClick={() => setSelected(idx)}
               >
-                {String.fromCharCode(65 + idx)}. {choice.content.replace(/^[A-Z]\.\s*/, '')}
+                {String.fromCharCode(65 + idx)}.{" "}
+                {choice.content.replace(/^[A-Z]\.\s*/, "")}
               </button>
             ))}
           </div>
@@ -178,7 +179,7 @@ const UniversalQuestionPage = () => {
             disabled={selected === null}
             onClick={handleNext}
           >
-            {currentIndex < quizList.length - 1 ? '다음 문제' : '제출'}
+            {currentIndex < quizList.length - 1 ? "다음 문제" : "제출"}
           </button>
         </div>
       </div>
