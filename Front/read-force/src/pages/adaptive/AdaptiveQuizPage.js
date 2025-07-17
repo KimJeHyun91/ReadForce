@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./AdaptiveQuizPage.css";
-import clockImg from "../../assets/image/clock.png";
-import axiosInstance from "../../api/axiosInstance";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../../api/axiosInstance';
+import './AdaptiveQuizPage.css';
+import clockImg from '../../assets/image/clock.png';
 
 const AdaptiveQuizPage = () => {
   const navigate = useNavigate();
@@ -23,10 +23,7 @@ const AdaptiveQuizPage = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const res = await axiosInstance.get(
-          "/recommend/get-recommend?language=KOREAN"
-        );
-
+        const res = await api.get('/recommend/get-recommend?language=KOREAN');
         const data = res.data;
 
         if (!data || !data.question || !data.choiceList) {
@@ -85,14 +82,10 @@ const AdaptiveQuizPage = () => {
     };
 
     try {
-      const res = await axiosInstance.post(
-        "/learning/save-multiple-choice",
-        payload
-      );
+      const res = await api.post('/learning/save-multiple-choice', payload);
 
       const isCorrect = quiz.choiceList[selectedIndex]?.isCorrect;
-
-      const correctChoice = quiz.choiceList.find((choice) => choice.isCorrect);
+      const correctChoice = quiz.choiceList.find(choice => choice.isCorrect);
       const correctChoiceIndex = correctChoice?.choiceIndex ?? -1;
       const correctContent = correctChoice?.content ?? "";
       const explanation =

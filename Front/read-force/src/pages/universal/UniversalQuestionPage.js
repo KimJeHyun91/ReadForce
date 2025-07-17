@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
-import "./css/UniversalQuestionPage.css";
-import fetchWithAuth from "../../utils/fetchWithAuth";
-import clockImg from "../../assets/image/clock.png";
-import axiosInstance from "../../api/axiosInstance";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import './css/UniversalQuestionPage.css';
+import api from '../../api/axiosInstance';
+import clockImg from '../../assets/image/clock.png';
 
 const UniversalQuestionPage = () => {
   const { id } = useParams();
@@ -67,14 +66,13 @@ const UniversalQuestionPage = () => {
 
     setPassage(loadedPassage);
 
-    axiosInstance
-      .get(
-        `/multiple_choice/get-multiple-choice-question-list?passageNo=${loadedPassage.passageNo}`
-      )
+    api
+      .get(`/multiple_choice/get-multiple-choice-question-list?passageNo=${loadedPassage.passageNo}`)
       .then((res) => {
         setQuizList(res.data);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error('퀴즈 로딩 중 오류:', err);
         setError("퀴즈 로딩 중 오류 발생");
       });
   }, [id, location.state]);
@@ -85,14 +83,15 @@ const UniversalQuestionPage = () => {
     const solvingTime = Math.floor((Date.now() - startTime) / 1000);
 
     try {
-      await axiosInstance.post("/learning/save-multiple-choice", {
+      await api.post('/learning/save-multiple-choice', {
         questionNo: currentQuiz.questionNo,
         selectedIndex: selected,
         questionSolvingTime: solvingTime,
         isFavorit: false,
       });
     } catch (err) {
-      alert("답안 저장 중 오류가 발생했습니다. 다시 시도해주세요.");
+      console.error('답안 저장 중 오류:', err);
+      alert('답안 저장 중 오류가 발생했습니다. 다시 시도해주세요.');
       return;
     }
 
