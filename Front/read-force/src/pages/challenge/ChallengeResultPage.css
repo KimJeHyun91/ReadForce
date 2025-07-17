@@ -1,6 +1,6 @@
 /* ───── 기본 = 모바일(≤375 px) ───── */
 .ChallengeResultPage-container {
-  min-height: 100vh;
+  min-height: 70vh;
   padding: 48px 16px;
   display: flex;
   flex-direction: column;

@@ -84,11 +84,10 @@ const ChallengeQuizPage = () => {
       alert(`오늘의 도전 완료! 점수: ${res.data.SCORE}`);
       navigate('/challenge/result',{
         state: {
-          finalScore: res.data.SCORE || res.data.score, // 둘 중 하나에 값이 있다면
+          finalScore: res.data.SCORE || res.data.score,
         },
       });
     } catch (error) {
-      console.log('🔥 error.response.data:', error.response?.data);
 
       const errorCode =
         error.response?.data?.MESSAGE_CODE || 
