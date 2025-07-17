@@ -66,7 +66,6 @@ const TestQuestionPage = () => {
       language,
     };
 
-    console.log('📤 제출 요청:', payload);
 
     const endpointMap = {
       VOCABULARY: '/test/submit-vocabulary-result',
@@ -105,7 +104,6 @@ const TestQuestionPage = () => {
         navigate('/test-result', { state: { result: res.data } });
       }
     } catch (err) {
-      console.error('❌ 제출 오류', err);
       alert('제출 중 오류가 발생했습니다.');
     } finally {
       setIsSubmitting(false);

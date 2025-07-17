@@ -45,7 +45,7 @@ const MyPage = () => {
         setProfileImageUrl(imageUrl);
       })
       .catch(() => {
-        console.warn("프로필 이미지 없음 → 기본 이미지 사용");
+
         setProfileImageUrl(defaultProfileImage);
       });
 
@@ -99,7 +99,7 @@ const MyPage = () => {
           streak: getStreak(dates),
         });
       })
-      .catch((e) => console.error("출석 로딩 실패:", e));
+
   }, []);
 
   useEffect(() => {
@@ -109,7 +109,7 @@ const MyPage = () => {
         const rate = res.data?.OVERALL_CORRECT_ANSWER_RATE;
         if (typeof rate === "number") setCorrectRate(rate);
       })
-      .catch((e) => console.error("정답률 로딩 실패:", e));
+
   }, []);
 
   useEffect(() => {
@@ -119,7 +119,7 @@ const MyPage = () => {
         const count = res.data?.TODAY_SOLVED_QUESTION_COUNT;
         if (typeof count === "number") setTodaySolvedCount(count);
       })
-      .catch((e) => console.error("오늘 푼 문제 로딩 실패:", e));
+
   }, []);
 
   useEffect(() => {
@@ -146,18 +146,8 @@ const MyPage = () => {
           fav.status === "fulfilled" ? fav.value.data : []
         );
 
-        if (total.status === "rejected")
-          console.warn("총 학습 로딩 실패:", total.reason);
-        if (incorrect.status === "rejected")
-          console.warn("전체 틀린 문제 로딩 실패:", incorrect.reason);
-        if (today.status === "rejected")
-          console.warn("오늘 학습 로딩 실패:", today.reason);
-        if (todayWrong.status === "rejected")
-          console.warn("오늘 틀린 학습 로딩 실패:", todayWrong.reason);
-        if (fav.status === "rejected")
-          console.warn("즐겨찾기 지문 로딩 실패:", fav.reason);
       } catch (e) {
-        console.error("예상치 못한 오류 발생:", e);
+
       }
     };
 
