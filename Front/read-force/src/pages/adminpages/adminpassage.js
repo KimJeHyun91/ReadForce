@@ -292,24 +292,24 @@ const AdminPassage = () => {
                         </select>
                         타입
                         <select value={newPassage.type} onChange={(e) => setNewPassage({ ...newPassage, type: e.target.value })}>
-                            <option value="1">정치</option>
-                            <option value="2">경제</option>
-                            <option value="3">사회</option>
-                            <option value="4">문화생활</option>
-                            <option value="5">IT과학</option>
-                            <option value="6">세계</option>
-                            <option value="7">스포츠</option>
-                            <option value="8">연예</option>
-                            <option value="9">추리</option>
-                            <option value="10">공상과학</option>
-                            <option value="11">판타지</option>
-                            <option value="12">로맨스</option>
-                            <option value="13">역사</option>
-                            <option value="14">모험</option>
-                            <option value="15">스릴러</option>
-                            <option value="16">삶의 조각</option>
-                            <option value="17">전통</option>
-                            <option value="18">정보</option>
+                            <option value="0">정치</option>
+                            <option value="1">경제</option>
+                            <option value="2">사회</option>
+                            <option value="3">문화생활</option>
+                            <option value="4">IT과학</option>
+                            <option value="5">세계</option>
+                            <option value="6">스포츠</option>
+                            <option value="7">연예</option>
+                            <option value="8">추리</option>
+                            <option value="9">공상과학</option>
+                            <option value="10">판타지</option>
+                            <option value="11">로맨스</option>
+                            <option value="12">역사</option>
+                            <option value="13">모험</option>
+                            <option value="14">스릴러</option>
+                            <option value="15">삶의 조각</option>
+                            <option value="16">전통</option>
+                            <option value="17">정보</option>
                         </select>
                         문제 종류
                         <select value={newPassage.classification} onChange={(e) => setNewPassage({ ...newPassage, classification: e.target.value })}>
