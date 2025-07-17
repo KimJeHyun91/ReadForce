@@ -88,7 +88,6 @@ const ChallengeQuizPage = () => {
         },
       });
     } catch (error) {
-      console.log('🔥 error.response.data:', error.response?.data);
 
       const errorCode =
         error.response?.data?.MESSAGE_CODE || 

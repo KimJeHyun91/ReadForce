@@ -251,10 +251,6 @@
   padding: 20px 16px;      /* 좌우·상단 여백 넉넉히 */
 }
 
-.no-scroll {
-  overflow: hidden;
-}
-
 /* ❷ 상위 네비게이션 그룹 */
 .mobile-menu .menu-group {
   display: flex;
@@ -292,9 +288,10 @@
 }
 
 /* ===== body 스크롤 차단 ===== */
-.no-scroll {
+html.no-scroll,
+body.no-scroll {
   overflow: hidden;
-  height: 100vh;      /* iOS 사파리까지 안전하게 */
+  height: 100vh;
 }
 
 /* ===== 모바일 메뉴 항목을 세로 그룹화 ===== */
