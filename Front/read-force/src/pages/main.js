@@ -62,7 +62,7 @@ const Main = () => {
         setTop5Data(rankingRes.data.slice(0, 5));
         setWrongArticles(wrongRes.data);
       } catch (err) {
-        console.error("데이터 불러오기 실패:", err);
+
         setTop5Data([]);
         setWrongArticles([]);
       }
@@ -102,7 +102,10 @@ const Main = () => {
               <h2>{currentSlide.title}</h2>
               <p>{currentSlide.description}</p>
               {currentSlide.buttonText && (
-                <button onClick={handleButtonClick}>
+                <button
+                  className={currentSlide.buttonLink.includes("kyobobook") ? "btn-book" : "btn-test"}
+                  onClick={handleButtonClick}
+                >
                   {currentSlide.buttonText}
                 </button>
               )}

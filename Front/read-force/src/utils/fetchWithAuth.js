@@ -1,5 +1,7 @@
+// fetchWithAuth.js
+
 let isRefreshing = false; 
-let failedQueue = []; 
+let failedQueue = [];
 
 const addRequestToQueue = (originalRequest) => {
   return new Promise(resolve => {
@@ -40,12 +42,10 @@ export const fetchWithAuth = async (url, options = {}) => {
 
   if (res.status === 401 && refreshToken) {
     if (isRefreshing) {
-      console.warn('토큰 재발급이 이미 진행 중입니다. 현재 요청을 큐에 추가합니다:', url);
       return addRequestToQueue({ url, options });
     }
 
     isRefreshing = true;
-    console.log('액세스 토큰 만료. 리프레시 토큰 재발급을 시도합니다...');
 
     try {
       const refreshRes = await fetch(`/authentication/reissue-refresh-token?refreshToken=${refreshToken}`, {
@@ -59,7 +59,6 @@ export const fetchWithAuth = async (url, options = {}) => {
 
         localStorage.setItem('token', newAccessToken);
         localStorage.setItem('refresh_token', newRefreshToken);
-        console.log('✅ 새로운 AccessToken 및 RefreshToken 발급 성공.');
 
         isRefreshing = false;
         processQueue(null, newAccessToken);
@@ -112,7 +111,6 @@ export const toggleFavoritePassage = async (passageNo, isFavorite) => {
     if (!res.ok) throw new Error('서버 응답 실패');
 
     const data = await res.json();
-    console.log('✅ 즐겨찾기 변경 완료:', data);
     return true;
   } catch (err) {
     console.error('❌ 즐겨찾기 변경 실패:', err);
@@ -123,7 +121,7 @@ export const toggleFavoritePassage = async (passageNo, isFavorite) => {
 export const fetchFavoritePassageList = async () => {
   const res = await fetchWithAuth('/passage/get-favorite-passage-list');
   if (!res.ok) throw new Error('즐겨찾기 목록 실패');
-  return res.json();              
+  return res.json();              // [passageNo, passageNo ...]
 };
 
 export default fetchWithAuth;

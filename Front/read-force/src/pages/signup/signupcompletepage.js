@@ -28,15 +28,15 @@ const SignupCompletePage = () => {
       const res = await fetch(`/member/nickname-check?nickname=${nickname}`);
       if (res.ok) {
         const data = await res.json();
-        console.log(data.message);
+
         return true;
       } else {
         const data = await res.json();
-        console.warn(data.message || '닉네임 중복');
+
         return false;
       }
     } catch (err) {
-      console.error('닉네임 중복 확인 오류:', err);
+
       return false;
     }
   };
@@ -165,7 +165,7 @@ const SignupCompletePage = () => {
         setError(data.message || '회원가입 실패');
       }
     } catch (err) {
-      console.error(err);
+
       setError('서버 오류가 발생했습니다.');
     }
   };
