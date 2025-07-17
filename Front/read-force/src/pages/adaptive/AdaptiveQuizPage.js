@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import fetchWithAuth from '../../utils/fetchWithAuth';
+import api from '../../api/axiosInstance';
 import './AdaptiveQuizPage.css';
 import clockImg from '../../assets/image/clock.png';
 
@@ -23,14 +23,8 @@ const AdaptiveQuizPage = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const res = await fetchWithAuth('/recommend/get-recommend?language=KOREAN');
-
-        if (!res.ok) {
-          setNotFound(true);
-          return;
-        }
-
-        const data = await res.json();
+        const res = await api.get('/recommend/get-recommend?language=KOREAN');
+        const data = res.data;
 
         if (!data || !data.question || !data.choiceList) {
           setNotFound(true);
@@ -81,21 +75,13 @@ const AdaptiveQuizPage = () => {
       selectedIndex,
       questionSolvingTime: solvingTime,
       questionNo: quiz.questionNo,
-      isFavorit: false
+      isFavorit: false,
     };
 
     try {
-      const res = await fetchWithAuth('/learning/save-multiple-choice', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (!res.ok) throw new Error('정답 기록 실패');
+      const res = await api.post('/learning/save-multiple-choice', payload);
 
       const isCorrect = quiz.choiceList[selectedIndex]?.isCorrect;
-
-     
       const correctChoice = quiz.choiceList.find(choice => choice.isCorrect);
       const correctChoiceIndex = correctChoice?.choiceIndex ?? -1;
       const correctContent = correctChoice?.content ?? '';

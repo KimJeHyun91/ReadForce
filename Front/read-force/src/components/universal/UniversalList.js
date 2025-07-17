@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import UniversalFilterBar from './UniversalFilterBar';
 import UniversalCard from './UniversalCard';
 import './css/UniversalList.css';
-
-import api from '../../api/axiosInstance'; 
+import api from '../../api/axiosInstance';
 
 const UniversalList = ({
   items: initialItems = [],
@@ -13,67 +12,65 @@ const UniversalList = ({
   typeOptions = [],
   onSolve,
 }) => {
+
   const [items, setItems] = useState([]);
 
+  const fetchFavoritePassageList = async () => {
+    const res = await api.get('/favorite/get-favorite-list');
+    return res.data;
+  };
+
+  const toggleFavoritePassage = async (passageNo, isFavorite) => {
+    const url = isFavorite
+      ? `/favorite/add/${passageNo}`
+      : `/favorite/remove/${passageNo}`;
+    await api.post(url);
+  };
+
+  /* 2️⃣ props 변경 시 state 동기화 */
   useEffect(() => {
     const mergeFavorites = async () => {
       try {
-        const res = await api.get('/passage/get-favorite-passage-list');
-        const favList = res.data; 
-        const favSet = new Set(favList);
-
+        const favList = await fetchFavoritePassageList();
+        const favSet = new Set(favList.map(f => f.passageNo));
         const merged = initialItems.map((it, idx) => ({
           ...it,
           _uid: it.id ?? it.passageNo ?? idx,
           isFavorite: favSet.has(it.passageNo),
         }));
-
         setItems(merged);
       } catch (err) {
         console.error('즐겨찾기 목록 불러오기 실패:', err);
-
-        setItems(
-          initialItems.map((it, idx) => ({
-            ...it,
-            _uid: it.id ?? it.passageNo ?? idx,
-            isFavorite: false,
-          }))
-        );
+        setItems(initialItems.map((it, idx) => ({
+          ...it,
+          _uid: it.id ?? it.passageNo ?? idx,
+          isFavorite: false,
+        })));
       }
     };
-
     mergeFavorites();
   }, [initialItems]);
 
-  const toggleFavorite = async (uid, passageNo, currentIsFav) => {
+  const toggleFavorite = (uid, passageNo, currentIsFav) => {
     setItems(prev =>
       prev.map(it =>
         it._uid === uid ? { ...it, isFavorite: !it.isFavorite } : it
       )
     );
 
-    try {
-      await api.patch('/passage/change-favorite-state', {
-        passageNo,
-        isFavorite: !currentIsFav,
-      });
-    } catch (err) {
-      console.error('❌ 즐겨찾기 토글 실패:', err);
-
-    
+    toggleFavoritePassage(passageNo, !currentIsFav).catch(() => {
       setItems(prev =>
         prev.map(it =>
           it._uid === uid ? { ...it, isFavorite: currentIsFav } : it
         )
       );
-
       alert('서버 저장 실패!');
-    }
+    });
   };
 
   const filteredItems = items.filter((item) => {
     const matchLevel = level ? item.level === Number(level) : true;
-    const matchType = type ? item.type === type : true;
+    const matchType  = type  ? item.type === type           : true;
     return matchLevel && matchType;
   });
 
@@ -83,18 +80,17 @@ const UniversalList = ({
       : new Date(a.publishedAt) - new Date(b.publishedAt)
   );
 
-  const itemsPerPage = 5;
+  const itemsPerPage   = 5;
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = Math.ceil(sorted.length / itemsPerPage);
-  const pageGroupSize = 5;
-  const currentGroup = Math.floor((currentPage - 1) / pageGroupSize);
-  const startPage = currentGroup * pageGroupSize + 1;
-  const endPage = Math.min(startPage + pageGroupSize - 1, totalPages);
-  const visiblePages = Array.from(
+  const totalPages     = Math.ceil(sorted.length / itemsPerPage);
+  const pageGroupSize  = 5;
+  const currentGroup   = Math.floor((currentPage - 1) / pageGroupSize);
+  const startPage      = currentGroup * pageGroupSize + 1;
+  const endPage        = Math.min(startPage + pageGroupSize - 1, totalPages);
+  const visiblePages   = Array.from(
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i
   );
-
   const paginated = sorted.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -103,17 +99,17 @@ const UniversalList = ({
   return (
     <div className="UniversalList-container">
       <UniversalFilterBar
-        level={level} setLevel={setLevel}
+        level={level}  setLevel={setLevel}
         orderBy={orderBy} setOrderBy={setOrderBy}
-        type={type} setType={setType}
+        type={type}    setType={setType}
         typeOptions={typeOptions}
       />
 
+      {/* 7️⃣ 카드 리스트 */}
       <div className="UniversalList-list">
         {paginated.length ? (
           paginated.map((item, index) => {
-            const fallbackId =
-              item.id ?? item.new_passageNo ?? item.news_no ?? index;
+            const fallbackId = item.id ?? item.new_passageNo ?? item.news_no ?? index;
             return (
               <UniversalCard
                 key={fallbackId}
@@ -121,8 +117,7 @@ const UniversalList = ({
                 typeOptions={typeOptions}
                 onSolve={onSolve}
                 onToggleFavorite={() =>
-                  toggleFavorite(item._uid, item.passageNo, item.isFavorite)
-                }
+                  toggleFavorite(item._uid, item.passageNo, item.isFavorite)}
               />
             );
           })
@@ -131,6 +126,7 @@ const UniversalList = ({
         )}
       </div>
 
+      {/* 8️⃣ 페이지네이션 */}
       <div className="UniversalList-pagination">
         <button
           onClick={() => setCurrentPage(startPage - 1)}

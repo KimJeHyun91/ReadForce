@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import './css/UniversalQuestionPage.css';
-import fetchWithAuth from '../../utils/fetchWithAuth';
+import api from '../../api/axiosInstance';
 import clockImg from '../../assets/image/clock.png';
 
 const UniversalQuestionPage = () => {
@@ -33,7 +33,7 @@ const UniversalQuestionPage = () => {
     setStartTime(newStart);
     setElapsedSeconds(0);
     setIsWaiting(true);
-    setSelected(null); 
+    setSelected(null);
 
     const timer = setInterval(() => {
       const secondsPassed = Math.floor((Date.now() - newStart) / 1000);
@@ -66,13 +66,13 @@ const UniversalQuestionPage = () => {
 
     setPassage(loadedPassage);
 
-    fetchWithAuth(`/multiple_choice/get-multiple-choice-question-list?passageNo=${loadedPassage.passageNo}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setQuizList(data);
+    api
+      .get(`/multiple_choice/get-multiple-choice-question-list?passageNo=${loadedPassage.passageNo}`)
+      .then((res) => {
+        setQuizList(res.data);
       })
       .catch((err) => {
-
+        console.error('퀴즈 로딩 중 오류:', err);
         setError("퀴즈 로딩 중 오류 발생");
       });
   }, [id, location.state]);
@@ -83,18 +83,14 @@ const UniversalQuestionPage = () => {
     const solvingTime = Math.floor((Date.now() - startTime) / 1000);
 
     try {
-      await fetchWithAuth('/learning/save-multiple-choice', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          questionNo: currentQuiz.questionNo,
-          selectedIndex: selected,
-          questionSolvingTime: solvingTime,
-          isFavorit: false,
-        }),
+      await api.post('/learning/save-multiple-choice', {
+        questionNo: currentQuiz.questionNo,
+        selectedIndex: selected,
+        questionSolvingTime: solvingTime,
+        isFavorit: false,
       });
     } catch (err) {
-
+      console.error('답안 저장 중 오류:', err);
       alert('답안 저장 중 오류가 발생했습니다. 다시 시도해주세요.');
       return;
     }
@@ -158,7 +154,7 @@ const UniversalQuestionPage = () => {
 
           {isWaiting && (
             <div className="wait-message">
-             ⏳ 선택은 {Math.max(0, 10 - elapsedSeconds)}초 후에 가능합니다.
+              ⏳ 선택은 {Math.max(0, 10 - elapsedSeconds)}초 후에 가능합니다.
             </div>
           )}
 
