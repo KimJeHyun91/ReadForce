@@ -66,7 +66,6 @@ const TestQuestionPage = () => {
       language,
     };
 
-    console.log('📤 제출 요청:', payload);
 
     const endpointMap = {
       VOCABULARY: '/test/submit-vocabulary-result',
@@ -79,12 +78,9 @@ const TestQuestionPage = () => {
     try {
       const res = await api.post(endpoint, payload);
 
-      // ✅ 정답 여부 콘솔 출력
       const submittedChoice = res.data?.choiceList?.find(c => c.choiceIndex === selected);
       if (submittedChoice?.isCorrect === true) {
-        console.log('✅ 정답입니다!');
       } else {
-        console.log('❌ 오답입니다.');
       }
 
       if (res.data?.choiceList) {
@@ -108,7 +104,6 @@ const TestQuestionPage = () => {
         navigate('/test-result', { state: { result: res.data } });
       }
     } catch (err) {
-      console.error('❌ 제출 오류', err);
       alert('제출 중 오류가 발생했습니다.');
     } finally {
       setIsSubmitting(false);

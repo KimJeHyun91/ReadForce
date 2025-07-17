@@ -62,7 +62,7 @@ const Main = () => {
         setTop5Data(rankingRes.data.slice(0, 5));
         setWrongArticles(wrongRes.data);
       } catch (err) {
-        console.error("데이터 불러오기 실패:", err);
+
         setTop5Data([]);
         setWrongArticles([]);
       }

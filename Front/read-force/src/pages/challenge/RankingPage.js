@@ -28,7 +28,6 @@ const RankingPage = () => {
         });
         setRankingData(res.data);
       } catch (err) {
-        console.error('랭킹 데이터 불러오기 실패:', err);
         setError('랭킹 정보를 불러오지 못했습니다.');
       } finally {
         setIsLoading(false);

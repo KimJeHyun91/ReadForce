@@ -43,7 +43,6 @@ export default function ResetPassword() {
         alert(`재설정 실패: ${data.message || '오류 발생'}`);
       }
     } catch (error) {
-      console.error('비밀번호 재설정 에러:', error);
       alert('서버 오류로 비밀번호를 재설정할 수 없습니다.');
     }
   };

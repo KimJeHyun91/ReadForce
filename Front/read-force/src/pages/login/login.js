@@ -24,7 +24,6 @@ export default function Login() {
       });
 
       const data = await response.json();
-      console.log("로그인 응답 데이터", data);
 
 if (response.ok) {
   // ② 필드명 양쪽 다 시도
@@ -51,7 +50,6 @@ if (response.ok) {
         setError(data.message || '로그인에 실패했습니다.');
       }
     } catch (err) {
-      console.error('로그인 요청 실패:', err);
       setError('서버 오류가 발생했습니다.');
     }
   };
