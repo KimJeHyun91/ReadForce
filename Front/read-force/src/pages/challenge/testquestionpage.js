@@ -66,7 +66,6 @@ const TestQuestionPage = () => {
       language,
     };
 
-
     const endpointMap = {
       VOCABULARY: '/test/submit-vocabulary-result',
       FACTUAL: '/test/submit-factual-result',

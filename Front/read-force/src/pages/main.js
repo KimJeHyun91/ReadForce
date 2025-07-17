@@ -102,7 +102,10 @@ const Main = () => {
               <h2>{currentSlide.title}</h2>
               <p>{currentSlide.description}</p>
               {currentSlide.buttonText && (
-                <button onClick={handleButtonClick}>
+                <button
+                  className={currentSlide.buttonLink.includes("kyobobook") ? "btn-book" : "btn-test"}
+                  onClick={handleButtonClick}
+                >
                   {currentSlide.buttonText}
                 </button>
               )}
@@ -149,7 +152,7 @@ const Main = () => {
                     <tr key={user.nickname}>
                       <td className={`rank-number ${rankClass}`}>{idx + 1}</td>
                       <td>{user.nickname}</td>
-                      <td className={`point ${rankClass}`}>{user.score ?? 0}p</td>
+                      <td className={`point ${rankClass}`}>{(user.score ?? 0).toFixed(1)}p</td>
                     </tr>
                   );
                 })}

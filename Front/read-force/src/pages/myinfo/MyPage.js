@@ -213,6 +213,7 @@ const MyPage = () => {
             prev2Label={null}
             minDetail="month"
             maxDetail="month"
+            showNeighboringMonth={false}
             tileClassName={({ date, view }) => {
               if (view === "month") {
                 const isAttendance = attendanceDates.some(

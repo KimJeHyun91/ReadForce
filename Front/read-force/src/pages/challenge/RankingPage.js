@@ -37,8 +37,10 @@ const RankingPage = () => {
     fetchRanking();
   }, [selectedCategory]);
 
-  const renderScore = (user) =>
-    user[selectedCategory.scoreKey] ?? user.score ?? 0;
+  const renderScore = (user) => {
+    const score = user[selectedCategory.scoreKey] ?? user.score ?? 0;
+      return Number(score).toFixed(1);
+    };
 
   return (
     <div className="page-container ranking-wrapper">
