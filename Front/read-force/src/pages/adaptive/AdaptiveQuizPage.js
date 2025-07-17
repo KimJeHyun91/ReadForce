@@ -15,8 +15,8 @@ const AdaptiveQuizPage = () => {
   const [isWaiting, setIsWaiting] = useState(true);
 
   const formatTime = (seconds) => {
-    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
-    const s = String(seconds % 60).padStart(2, '0');
+    const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const s = String(seconds % 60).padStart(2, "0");
     return `${m}:${s}`;
   };
 
@@ -35,7 +35,7 @@ const AdaptiveQuizPage = () => {
         setStartTime(Date.now());
         setSelectedIndex(null);
       } catch (err) {
-        console.error('API 통신 오류:', err);
+        console.error("API 통신 오류:", err);
         setNotFound(true);
       }
     };
@@ -69,7 +69,10 @@ const AdaptiveQuizPage = () => {
   const handleSubmit = async () => {
     if (selectedIndex === null) return;
 
-    const solvingTime = Math.max(10, Math.floor((Date.now() - startTime) / 1000));
+    const solvingTime = Math.max(
+      10,
+      Math.floor((Date.now() - startTime) / 1000)
+    );
 
     const payload = {
       selectedIndex,
@@ -84,29 +87,32 @@ const AdaptiveQuizPage = () => {
       const isCorrect = quiz.choiceList[selectedIndex]?.isCorrect;
       const correctChoice = quiz.choiceList.find(choice => choice.isCorrect);
       const correctChoiceIndex = correctChoice?.choiceIndex ?? -1;
-      const correctContent = correctChoice?.content ?? '';
-      const explanation = correctChoice?.explanation ?? '해설이 제공되지 않았습니다.';
+      const correctContent = correctChoice?.content ?? "";
+      const explanation =
+        correctChoice?.explanation ?? "해설이 제공되지 않았습니다.";
 
-      navigate('/adaptive-learning/result', {
+      navigate("/adaptive-learning/result", {
         state: {
           isCorrect,
           explanation,
           correctChoiceIndex,
           correctContent,
-          next: '/adaptive-learning/start'
-        }
+          next: "/adaptive-learning/start",
+        },
       });
     } catch (err) {
-      console.error('🚨 제출 실패:', err);
+      console.error("제출 실패:", err);
     }
   };
 
   if (notFound) {
     return (
       <div className="page-container quiz-notfound-container">
-        <div className="warning">❗ 제공된 문제가 없습니다.</div>
+        <div className="warning">제공된 문제가 없습니다.</div>
         <div className="description">다른 문제를 시도해 주세요.</div>
-        <button className="go-back-button" onClick={() => navigate(-1)}>🔙 돌아가기</button>
+        <button className="go-back-button" onClick={() => navigate(-1)}>
+          🔙 돌아가기
+        </button>
       </div>
     );
   }
@@ -117,7 +123,7 @@ const AdaptiveQuizPage = () => {
     <div className="quiz-layout">
       <div className="quiz-passage">
         <h3 className="passage-title">🤖 적응력 문제</h3>
-        <p className="passage-text">{quiz.content || '※ 추가 지문 없음'}</p>
+        <p className="passage-text">{quiz.content || "※ 추가 지문 없음"}</p>
       </div>
 
       <div className="quiz-box">
@@ -141,7 +147,9 @@ const AdaptiveQuizPage = () => {
           {quiz.choiceList.map((choice, idx) => (
             <button
               key={idx}
-              className={`quiz-option ${selectedIndex === idx ? 'selected' : ''}`}
+              className={`quiz-option ${
+                selectedIndex === idx ? "selected" : ""
+              }`}
               disabled={isWaiting}
               onClick={() => setSelectedIndex(idx)}
             >
