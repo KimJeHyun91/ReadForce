@@ -89,7 +89,6 @@ const ChallengeQuizPage = () => {
 
     try {
       const res = await api.post('/challenge/submit-challenge-result', payload);
-      alert(`오늘의 도전 완료! 점수: ${res.data.SCORE}`);
       navigate('/challenge/result',{
         state: {
           finalScore: res.data.SCORE || res.data.score,

@@ -20,14 +20,13 @@ const UniversalList = ({
     return res.data;
   };
 
-  const toggleFavoritePassage = async (passageNo, isFavorite) => {
-    const url = isFavorite
-      ? `/favorite/add/${passageNo}`
-      : `/favorite/remove/${passageNo}`;
-    await api.post(url);
+    const toggleFavoritePassage = async (passageNo, isFavorite) => {
+    await api.patch('/passage/change-favorite-state', {
+      passageNo,
+      isFavorite,
+    });
   };
 
-  /* 2️⃣ props 변경 시 state 동기화 */
   useEffect(() => {
     const mergeFavorites = async () => {
       try {
