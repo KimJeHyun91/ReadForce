@@ -102,7 +102,10 @@ const Main = () => {
               <h2>{currentSlide.title}</h2>
               <p>{currentSlide.description}</p>
               {currentSlide.buttonText && (
-                <button onClick={handleButtonClick}>
+                <button
+                  className={currentSlide.buttonLink.includes("kyobobook") ? "btn-book" : "btn-test"}
+                  onClick={handleButtonClick}
+                >
                   {currentSlide.buttonText}
                 </button>
               )}
