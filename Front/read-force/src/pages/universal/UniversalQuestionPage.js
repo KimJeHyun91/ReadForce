@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import './css/UniversalQuestionPage.css';
-import fetchWithAuth from '../../utils/fetchWithAuth';
-import clockImg from '../../assets/image/clock.png';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import "./css/UniversalQuestionPage.css";
+import fetchWithAuth from "../../utils/fetchWithAuth";
+import clockImg from "../../assets/image/clock.png";
+import axiosInstance from "../../api/axiosInstance";
 
 const UniversalQuestionPage = () => {
   const { id } = useParams();
@@ -23,8 +24,8 @@ const UniversalQuestionPage = () => {
   const currentQuiz = quizList[currentIndex];
 
   const formatTime = (seconds) => {
-    const m = String(Math.floor(seconds / 60)).padStart(2, '0');
-    const s = String(seconds % 60).padStart(2, '0');
+    const m = String(Math.floor(seconds / 60)).padStart(2, "0");
+    const s = String(seconds % 60).padStart(2, "0");
     return `${m}:${s}`;
   };
 
@@ -33,7 +34,7 @@ const UniversalQuestionPage = () => {
     setStartTime(newStart);
     setElapsedSeconds(0);
     setIsWaiting(true);
-    setSelected(null); 
+    setSelected(null);
 
     const timer = setInterval(() => {
       const secondsPassed = Math.floor((Date.now() - newStart) / 1000);
@@ -53,10 +54,10 @@ const UniversalQuestionPage = () => {
   useEffect(() => {
     const loadedPassage = location.state?.passage || {
       passageNo: Number(id),
-      title: '',
-      summary: '',
-      content: '',
-      language: '한국어',
+      title: "",
+      summary: "",
+      content: "",
+      language: "한국어",
     };
 
     if (!loadedPassage.passageNo) {
@@ -66,13 +67,14 @@ const UniversalQuestionPage = () => {
 
     setPassage(loadedPassage);
 
-    fetchWithAuth(`/multiple_choice/get-multiple-choice-question-list?passageNo=${loadedPassage.passageNo}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setQuizList(data);
+    axiosInstance
+      .get(
+        `/multiple_choice/get-multiple-choice-question-list?passageNo=${loadedPassage.passageNo}`
+      )
+      .then((res) => {
+        setQuizList(res.data);
       })
-      .catch((err) => {
-
+      .catch(() => {
         setError("퀴즈 로딩 중 오류 발생");
       });
   }, [id, location.state]);
@@ -83,19 +85,14 @@ const UniversalQuestionPage = () => {
     const solvingTime = Math.floor((Date.now() - startTime) / 1000);
 
     try {
-      await fetchWithAuth('/learning/save-multiple-choice', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          questionNo: currentQuiz.questionNo,
-          selectedIndex: selected,
-          questionSolvingTime: solvingTime,
-          isFavorit: false,
-        }),
+      await axiosInstance.post("/learning/save-multiple-choice", {
+        questionNo: currentQuiz.questionNo,
+        selectedIndex: selected,
+        questionSolvingTime: solvingTime,
+        isFavorit: false,
       });
     } catch (err) {
-
-      alert('답안 저장 중 오류가 발생했습니다. 다시 시도해주세요.');
+      alert("답안 저장 중 오류가 발생했습니다. 다시 시도해주세요.");
       return;
     }
 
@@ -114,11 +111,11 @@ const UniversalQuestionPage = () => {
       setCurrentIndex(currentIndex + 1);
     } else {
       const categoryPath =
-        passage.category === 'NEWS'
-          ? 'article'
-          : passage.category === 'NOVEL'
-          ? 'novel'
-          : 'fairytale';
+        passage.category === "NEWS"
+          ? "article"
+          : passage.category === "NOVEL"
+          ? "novel"
+          : "fairytale";
 
       navigate(`/${categoryPath}/result`, {
         state: {
@@ -158,7 +155,7 @@ const UniversalQuestionPage = () => {
 
           {isWaiting && (
             <div className="wait-message">
-             ⏳ 선택은 {Math.max(0, 10 - elapsedSeconds)}초 후에 가능합니다.
+              ⏳ 선택은 {Math.max(0, 10 - elapsedSeconds)}초 후에 가능합니다.
             </div>
           )}
 
@@ -166,11 +163,12 @@ const UniversalQuestionPage = () => {
             {currentQuiz.choiceList.map((choice, idx) => (
               <button
                 key={idx}
-                className={`quiz-option ${selected === idx ? 'selected' : ''}`}
+                className={`quiz-option ${selected === idx ? "selected" : ""}`}
                 disabled={isWaiting}
                 onClick={() => setSelected(idx)}
               >
-                {String.fromCharCode(65 + idx)}. {choice.content.replace(/^[A-Z]\.\s*/, '')}
+                {String.fromCharCode(65 + idx)}.{" "}
+                {choice.content.replace(/^[A-Z]\.\s*/, "")}
               </button>
             ))}
           </div>
@@ -182,7 +180,7 @@ const UniversalQuestionPage = () => {
             disabled={selected === null}
             onClick={handleNext}
           >
-            {currentIndex < quizList.length - 1 ? '다음 문제' : '제출'}
+            {currentIndex < quizList.length - 1 ? "다음 문제" : "제출"}
           </button>
         </div>
       </div>
