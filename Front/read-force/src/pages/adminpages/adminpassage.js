@@ -40,29 +40,29 @@ const AdminPassage = () => {
     });
     const TYPE_OPTIONS = {
     NEWS: [
-        { value: "1", label: "정치" },
-        { value: "2", label: "경제" },
-        { value: "3", label: "사회" },
-        { value: "4", label: "문화생활" },
-        { value: "5", label: "IT과학" },
-        { value: "6", label: "세계" },
-        { value: "7", label: "스포츠" },
-        { value: "8", label: "연예" }
+        { value: "0", label: "정치" },
+        { value: "1", label: "경제" },
+        { value: "2", label: "사회" },
+        { value: "3", label: "문화생활" },
+        { value: "4", label: "IT과학" },
+        { value: "5", label: "세계" },
+        { value: "6", label: "스포츠" },
+        { value: "7", label: "연예" }
     ],
     NOVEL: [
-        { value: "9", label: "추리" },
-        { value: "10", label: "공상과학" },
-        { value: "11", label: "판타지" },
-        { value: "12", label: "로맨스" },
-        { value: "13", label: "역사" },
-        { value: "14", label: "모험" },
-        { value: "15", label: "스릴러" }
+        { value: "8", label: "추리" },
+        { value: "9", label: "공상과학" },
+        { value: "10", label: "판타지" },
+        { value: "11", label: "로맨스" },
+        { value: "12", label: "역사" },
+        { value: "13", label: "모험" },
+        { value: "14", label: "스릴러" }
     
     ],
     FAIRY_TALE: [
-        { value: "16", label: "생활" },
-        { value: "17", label: "전통" },
-        { value: "18", label: "정보" }
+        { value: "15", label: "생활" },
+        { value: "16", label: "전통" },
+        { value: "17", label: "정보" }
     ]
     
 };
@@ -232,8 +232,6 @@ const AdminPassage = () => {
                         <br /><label>카테고리:</label>
                         <select value={category} onChange={(e) => setCategory(e.target.value)}>
                             <option value="NEWS">뉴스</option>
-                            <option value="NOVEL">소설</option>
-                            <option value="FAIRY_TALE">동화</option>
                         </select>
 
                         <br /><label>유형:</label>
