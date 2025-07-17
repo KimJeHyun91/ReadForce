@@ -232,8 +232,6 @@ const AdminPassage = () => {
                         <br /><label>카테고리:</label>
                         <select value={category} onChange={(e) => setCategory(e.target.value)}>
                             <option value="NEWS">뉴스</option>
-                            <option value="NOVEL">소설</option>
-                            <option value="FAIRY_TALE">동화</option>
                         </select>
 
                         <br /><label>유형:</label>
