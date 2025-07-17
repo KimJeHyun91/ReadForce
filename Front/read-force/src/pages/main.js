@@ -152,7 +152,7 @@ const Main = () => {
                     <tr key={user.nickname}>
                       <td className={`rank-number ${rankClass}`}>{idx + 1}</td>
                       <td>{user.nickname}</td>
-                      <td className={`point ${rankClass}`}>{user.score ?? 0}p</td>
+                      <td className={`point ${rankClass}`}>{(user.score ?? 0).toFixed(1)}p</td>
                     </tr>
                   );
                 })}

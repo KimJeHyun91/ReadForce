@@ -161,10 +161,8 @@ const Header = () => {
         </div>
       </div>
 
-    {/* 모바일 메뉴: 햄버거 클릭 시 */}
     {showMobileMenu && (
       <div className="mobile-menu">
-        {/* 메인 네비게이션 */}
         <div className="menu-group">
           <Link to="/article"           onClick={() => setShowMobileMenu(false)}>뉴스</Link>
           <Link to="/novel"             onClick={() => setShowMobileMenu(false)}>소설</Link>
@@ -172,7 +170,6 @@ const Header = () => {
           <Link to="/challenge"         onClick={() => setShowMobileMenu(false)}>문해력도전</Link>
           <Link to="/adaptive-learning" onClick={() => setShowMobileMenu(false)}>적응형학습</Link>
         </div>
-
         <div className="menu-section-title">계정</div>
         <div className="menu-group">
             {isLoggedIn ? (
