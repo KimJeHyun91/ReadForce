@@ -231,10 +231,8 @@ const Header = () => {
         </div>
       </div>
 
-      {/* 모바일 메뉴: 햄버거 클릭 시 */}
       {showMobileMenu && (
         <div className="mobile-menu">
-          {/* 메인 네비게이션 */}
           <div className="menu-group">
             <Link to="/article" onClick={() => setShowMobileMenu(false)}>
               뉴스
