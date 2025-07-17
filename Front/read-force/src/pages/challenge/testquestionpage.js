@@ -79,12 +79,9 @@ const TestQuestionPage = () => {
     try {
       const res = await api.post(endpoint, payload);
 
-      // ✅ 정답 여부 콘솔 출력
       const submittedChoice = res.data?.choiceList?.find(c => c.choiceIndex === selected);
       if (submittedChoice?.isCorrect === true) {
-        console.log('✅ 정답입니다!');
       } else {
-        console.log('❌ 오답입니다.');
       }
 
       if (res.data?.choiceList) {
